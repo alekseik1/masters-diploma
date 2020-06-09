@@ -15,12 +15,65 @@
     \label{eq:fd}
 \end{equation}
 Здесь $\mu$ есть химический потенциал, $T$ -- температура системы, а $\epsilon_k$ -- энергия $k$-ого квантового состояния. 
+Полное число частиц получается суммированием \eqref{eq:fd} по всем возможным значениям энергии.
+Полагая $\epsilon_k = p^2_{k} / (2m)$ и переходя к квазинепрерывному спектру по $k$, после сведения к интегрированию по энергии получим:
+\begin{equation}
+    \label{eq:conc}
+    \frac{N}{V}=\frac{g}{\sqrt{2} \pi^{2}} \int_{0}^{\infty} \frac{\sqrt{\varepsilon} d \varepsilon}{e^{(\varepsilon-\mu) / T}+1}.
+\end{equation}
+Здесь $V$ -- объем системы.
+Вводя безразмерный $y = \mu / T$ и объем на одну частицу $v = V / N$, можно переписать \eqref{eq:conc} в следующем виде:
+\begin{equation}
+    \frac{1}{v} = \frac{g T^{3/2}}{\sqrt{2}\pi^2}I_{1/2}(y).
+    \label{eq:mu_equation}
+\end{equation}
+Здесь введен т.н. интеграл Ферми-Дирака:
+\begin{equation}
+    \label{eq:fermi-dirak_integral_definition}
+    I_{j}(y)= \int_{0}^{\infty} \frac{t^{j}}{e^{t-y}+1} dt
+\end{equation}
+\begin{equation}
+    \label{eq:ifg_diff_rule}
+    \frac{d}{dx}\, I_k (x) = k I _{k-1} (x)
+\end{equation}
+
+Уравнение \eqref{eq:mu_equation} задает химический потенциал как функцию от температуры и удельного объема: $\mu = \mu(v, T)$.
+В секциях \ref{sec:asymp_low}, \ref{sec:asymp_high} приводится его решение в различных температурных пределах.
+
+В дальнейшем нам понадобятся первые и вторые производные $\mu(v, T)$.
+Для их получения продифференцируем \eqref{eq:mu_equation} по соответствующим переменным с учетом свойства \eqref{eq:ifg_diff_rule} и разрешим получающиеся уравнения относительно производных. Это даст следующие результаты:
+\begin{equation}
+   \label{eq:mu_T}
+   y'_{T} = -\frac{3 I_{1 / 2}(y)}{T I_{-1 / 2}(y)}
+\end{equation}
+
+\begin{equation}
+   \label{eq:mu_v}
+   y'_{v} = - \frac{2 I_{1 / 2} (y)}{v I_{-1 / 2} (y)}\,
+\end{equation}
+
+\begin{equation}
+   \label{eq:mu_vv}
+   y''_{vv} = \frac{4 I_{1 / 2} (y)}{v^2 I_{-1 / 2} (y)}\, + \frac{2 I_{-3 /2} (y) I_{1 / 2} ^2 (y)}{v^2 I_{-1 /2}^3 (y)}\,
+\end{equation}
+
+\begin{equation}
+   \label{eq:mu_TT}
+   y''_{TT} = \frac{15 I_{1 /2} (y)}{2 T^2 I_{-1 /2} (y)}\, + \frac{9 I_{-3 /2}(y) I_{1 /2}^2 (y)}{2 T^2 I_{-1 /2}^3 (y)}\,
+\end{equation}
+
+\begin{equation}
+   \label{eq:mu_vT}
+   y''_{vT} = y''_{Tv} = \frac{3 I_{1 /2}(y)}{T v I_{-1 /2} (y)}\, + \frac{3 I_{-3 /2} (y) I_{1 /2}^2 (y)}{T v I_{-1 /2}^3 (y)}\,
+\end{equation}
 
 \section{Термодинамические функции ИФГ}
 
 \section{Асимптотики при низких температурах}
+\label{sec:asymp_low}
 
 \section{Асимптотики при высоких температурах}
+\label{sec:asymp_high}
 
 \section{Программная реализация модели ИФГ}
 
