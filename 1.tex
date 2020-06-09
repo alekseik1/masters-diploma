@@ -143,6 +143,75 @@
 
 \section{Асимптотики при низких температурах}
 \label{sec:asymp_low}
+При низких температурах выполнено $y = \mu / T \gg 1$.
+В этом пределе справедливо разложение \cite{Shemyakin:JPA:2010}:
+\begin{equation}
+    \label{eq:Ihalf}
+    I_{1/2}(y) \approx
+    \frac{2y^{3/2}}{3}\left[1+\frac{\pi^2}{8y^2}+\frac{7\pi^4}{640y^4} + \ldots\right],
+\end{equation}
+\begin{equation}
+    \label{eq:I3half}
+    I_{3/2}(y) \approx \frac{2y^{5/2}}{5}\left[1+\frac{5\pi^2}{8y^2}-\frac{7\pi^4}{384y^4} + \ldots\right].
+\end{equation}
+Если оставить только первый член в \eqref{eq:Ihalf}, то выражение \eqref{eq:mu_equation} станет независимым от температуры.
+Это соответствует случаю $T=0$, в котором химический потенциал равен энергии Ферми:
+\begin{equation}
+    \mu|_{T = 0} = \varepsilon_F = \left( \frac{3\pi^2}{\sqrt{2}gv} \right)^{2/3}.
+\end{equation}
+Если же оставить первые два члена в \eqref{eq:Ihalf} и подставить $y = \epsilon_F / T$ во второй из них, то можно получить первую поправку для химического потенциала:
+\begin{equation}
+    \mu \approx \varepsilon_F\left[
+    1 - \frac{\pi^2}{12}\left( \frac{T}{\varepsilon_F} \right)^2 \right].
+    \label{eq:mulowtemp}
+\end{equation}
+Подставляя \eqref{eq:Ihalf}, \eqref{eq:I3half} в \eqref{eq:helmholtz_potential} и оставляя первые два члена, получим:
+\begin{equation}
+    F \approx \frac{g}{\sqrt{2}\pi^2}T^{5/2}v\left[ \frac{2}{5}y^{5/2} - \frac{\pi^2}{12}y^{1/2} \right]
+    = \frac{3T^{5/2}}{2\varepsilon_F^{3/2}}\left[ \frac{2}{5}y^{5/2} - \frac{\pi^2}{12}y^{1/2} \right].
+    \label{eq:Flowtemp}
+\end{equation}
+Наконец, подстановка \eqref{eq:mulowtemp} в \eqref{eq:Flowtemp} даст:
+\begin{equation}
+    \label{eq:F_lt}
+    F \approx \frac{3}{5}\epsilon_F\left[ 1 - \frac{5\pi^2}{12}\left( \frac{T}{\epsilon_F} \right)^2 \right]
+    = Av^{-2/3} - \frac{\beta}{2}T^2 v^{2/3}.
+\end{equation}
+Здесь $\beta = (g \pi / 6)^{3 / 2}$ -- т.н. коэффициент электронной теплоемкости \cite{Landau:statmech:1958},
+\begin{equation}
+    \label{eq:A_def}
+    A = \frac{3}{5}\left( \frac{3\pi^2}{\sqrt{2}g} \right)^{2/3}.
+\end{equation}
+
+Используя формулы \eqref{eq:PES}, \eqref{eq:CVCP}, \eqref{eq:CTCS}, получим:
+\begin{equation}
+    \label{eq:P_lt}
+    P = \frac{2}{3}Av^{-5/3} + \frac{\beta}{3}T^2 v^{-1/3},
+\end{equation}
+\begin{equation}
+    \label{eq:E_lt}
+    E = Av^{-2/3} + \frac{\beta}{2}T^2 v^{2/3} = \frac{3}{5}\varepsilon_F + \frac{\beta}{2}T^2 v^{2/3},
+\end{equation}
+\begin{equation}
+    \label{eq:S_lt}
+    S = \beta T v^{2/3},
+\end{equation}
+\begin{equation}
+    \label{eq:cv_lt}
+    C_v = \beta T v^{2/3},
+\end{equation}
+\begin{equation}
+    \label{eq:cp_lt}
+    C_P = \beta T v^{2/3},
+\end{equation}
+\begin{equation}
+    \label{eq:ct2_lt}
+    C_T^2 = \frac{10A}{9}v^{-2/3} + \frac{\beta}{9}T^2 v^{2/3},
+\end{equation}
+\begin{equation}
+    \label{eq:cs2_lt}
+    C_S^2 = \frac{10A}{9}v^{-2/3} + \frac{5\beta}{9}T^2 v^{2/3}.
+\end{equation}
 
 \section{Асимптотики при высоких температурах}
 \label{sec:asymp_high}
