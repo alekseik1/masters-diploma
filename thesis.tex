@@ -1,0 +1,172 @@
+\documentclass[%
+bachelor,    % тип документа
+%natbib,      % использовать пакет natbib для "сжатия" цитирований
+subf,        % использовать пакет subcaption для вложенной нумерации рисунков
+href,        % использовать пакет hyperref для создания гиперссылок
+colorlinks,  % цветные гиперссылки
+%fixint,     % включить прямые знаки интегралов
+]{disser}
+
+\usepackage[
+  a4paper, mag=1000,
+  left=2.5cm, right=1cm, top=2cm, bottom=2cm, headsep=0.7cm, footskip=1cm
+]{geometry}
+
+\usepackage[intlimits]{amsmath}
+\usepackage{amssymb,amsfonts}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\ifpdf\usepackage{epstopdf}\fi
+\usepackage[autostyle]{csquotes}
+
+% Русские варианты математических букв
+\renewcommand{\epsilon}{\varepsilon}
+
+% На всякий случай, старая эпсилон
+\newcommand{\epsilonn}{\epsilon}
+
+% Шрифт Times в тексте как основной
+%\usepackage{tempora}
+% альтернативный пакет из дистрибутива TeX Live
+%\usepackage{cyrtimes}
+
+% Шрифт Times в формулах как основной
+%\usepackage[varg,cmbraces,cmintegrals]{newtxmath}
+% альтернативный пакет
+%\usepackage[subscriptcorrection,nofontinfo]{mtpro2}
+
+\usepackage[%
+  style=gost-numeric,
+  backend=biber,
+  language=auto,
+  hyperref=auto,
+  autolang=other,
+  sorting=none
+]{biblatex}
+
+\addbibresource{thesis.bib}
+
+\DefineBibliographyStrings{russian}{number={\textnumero}}
+
+% Плавающие рисунки "в оборку".
+\usepackage{wrapfig}
+
+% Номера страниц снизу и по центру
+%\pagestyle{footcenter}
+%\chapterpagestyle{footcenter}
+
+% Точка с запятой в качестве разделителя между номерами цитирований
+%\setcitestyle{semicolon}
+
+% Использовать полужирное начертание для векторов
+\let\vec=\mathbf
+
+% Включать подсекции в оглавление
+\setcounter{tocdepth}{2}
+
+\graphicspath{{fig/}}
+
+\begin{document}
+
+% Переопределение стандартных заголовков
+%\def\contentsname{Содержание}
+%\def\conclusionname{Выводы}
+%\def\bibname{Литература}
+
+%
+% Титульный лист на русском языке
+%
+
+\institution{Московский физико-технический институт}
+
+% Имя лица, допускающего к защите (зав. кафедрой)
+\apname{В.Е. Фортов}
+
+\title{ВЫПУСКНАЯ РАБОТА\\БАКАЛАВРА}
+
+\topic{Программная реализация метода функционала плотности для взаимодействующего электронного газа на однородном компенсирующем фоне}
+
+% Автор
+\author{Кожарин Алексей Сергеевич}
+% Группа
+\group{642б}
+% Номер специальности
+\coursenum{111111}
+% Название специальности
+\course{Физика}
+
+% Научный руководитель
+\sa      {Левашов Павел Ремирович}
+\sastatus{к.~ф.-м.~н.}
+
+% Город и год
+\city{Москва}
+\date{\number\year}
+
+\maketitle
+
+%%
+%% Titlepage in English
+%%
+%
+%\institution{Name of Organization}
+%
+%% Approved by
+%\apname{Professor S.\,S.~Sidorov}
+%
+%\title{Bachelor's Thesis}
+%
+%% Topic
+%\topic{Dummy Title}
+%
+%% Author
+%\author{Author's Name} % Full Name
+%\course{Physics} % Specialization
+%
+%\group{} % Study Group
+%
+%% Scientific Advisor
+%\sa       {I.\,I.~Ivanov}
+%\sastatus {Professor}
+%
+%% Reviewer
+%\rev      {P.\,P.~Petrov}
+%\revstatus{Associate Professor}
+%
+%% Consultant
+%\con{}
+%\conspec{}
+%\constatus{}
+%
+%% City & Year
+%\city{Saint Petersburg}
+%\date{\number\year}
+%
+%\maketitle[en]
+
+% Содержание
+\tableofcontents
+
+% Введение
+\input{intro}
+
+% Глава 1
+\input{1}
+% Глава 2
+\input{2}
+% Глава 3
+\input{3}
+
+% Заключение
+\input{concl}
+
+% Список литературы
+\printbibliography[heading=bibintoc]
+
+% Приложения
+\appendix
+\input{a}
+
+\end{document}
