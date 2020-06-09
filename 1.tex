@@ -68,6 +68,78 @@
 \end{equation}
 
 \section{Термодинамические функции ИФГ}
+Согласно \cite{kirzhnits:UFN:1975}, выражение для свободной энергии Гельмгольца имеет вид:
+\begin{equation}
+   \label{eq:helmholtz_potential}
+   F = \frac{g}{\sqrt{2}\pi^2}\,  T^{5 / 2} v \left( y \, I_{1 /2} (y) - \frac{2}{3}\, I_{3 / 2} (y) \right)
+   = T\left[y - \frac{2}{3}\frac{I_{3/2}(y)}{I_{1/2}(y)}\right].
+\end{equation}
+Последнее равенство получается подстановкой $v$ из \eqref{eq:mu_equation}.
+Из выражения для $F$ можно получить остальные термодинамические величины:
+\begin{equation}
+    \label{eq:PES}
+    P = -F'_v;\quad
+    E = F - TF'_T;\quad
+    S = -F'_T;
+\end{equation}
+\begin{equation}
+    \label{eq:CVCP}
+    C_V = -TF''_{TT};\quad
+    C_P = -TF''_{TT} + \frac{T(F''_{vT})^2}{F''_{vv}};
+\end{equation}
+\begin{equation}
+    \label{eq:CTCS}
+    C_T^2 = v^2F''_{vv};\quad
+    C_S^2 = v^2F''_{vv} - \frac{v^2(F''_{vT})^2}{F''_{TT}};\quad
+    \gamma = \frac{VF''_{vT}}{TF''_{TT}};\ \ldots
+\end{equation}
+Здесь $P$ -- давление, $C_V$ и $C_P$ -- теплоемкости при постоянном объеме и давлении соответственно, $C_T$ и $C_S$ -- изотермическая и адиабатическая скорости звука, $\gamma$ -- параметр Грюнайзена.
+
+Используя результаты \eqref{eq:mu_T} -- \eqref{eq:mu_vT}, получим:
+\begin{equation}
+   \label{eq:pressure}
+   P = \frac{g \sqrt{2} T^{5 /2} I_{3 / 2}(y)}{3 \pi^{2}}
+   = \frac{2T}{3v}\frac{I_{3/2}(y)}{I_{1/2}(y)},
+\end{equation}
+
+\begin{equation}
+   \label{eq:energy}
+   E = \frac{g v}{\sqrt{2}\pi^2} T^{5 /2} I_{3 / 2}(y)
+   = \frac{I_{3/2}(y)}{I_{1/2}(y)}T,
+\end{equation}
+
+\begin{equation}
+   \label{eq:entropy}
+   S = -\frac{g\sqrt{2} T^{3 /2} v\left(3 I_{1 / 2}(y) y-5 I_{3 / 2}(y)\right)}{6 \pi^{2}}
+   = -\frac{3I_{1/2}(y) - 5I_{3/2}(y)}{3I_{1/2}(y)},
+\end{equation}
+
+\begin{equation}
+   \label{eq:C_v}
+   C_v = \frac{g\sqrt{2} T^{3 /2} v \left( 5 I_{-1 / 2 } (y) I_{3 /2} (y) - 9 I_{1 / 2}^2 (y)\right)}{4\pi^2 I_{-1 / 2} (y)}
+   = \frac{5}{2}\,\frac{I_{3/2}(y)}{I_{1/2}(y)} - \frac{9}{2}\,\frac{I_{1/2}(y)}{I_{-1/2}(y)},
+\end{equation}
+
+\begin{multline}
+   \label{eq:C_P}
+      C_{P} = \frac{5 g \sqrt{2} T^{3 / 2} v\left(5 I_{-1 / 2}(y) I_{3 / 2}(y)-9 I_{1 / 2}^{2}(y)\right) I_{3 / 2}(y)}{36 \pi^{2} I_{1 / 2}^{2}(y)}
+      = {}\\
+      \frac{25}{18}\,\frac{I^2_{3/2}(y)I_{-1/2}(y)}{I^3_{1/2}(y)} - \frac{5}{2}\,\frac{I_{3/2}(y)}{I_{1/2}(y)},
+\end{multline}
+
+\begin{equation}
+   \label{eq:C_T}
+   C_{T}^2 = \cfrac{\sqrt{2}g}{\pi^2}\,  \cfrac{T^{5 /2} v I_{1 / 2}^2 (y)}{I_{-1 / 2} (y)}
+   = \frac{2TI_{1/2}(y)}{I_{-1/2}(y)},
+\end{equation}
+
+\begin{equation}
+   \label{eq:C_S}
+   C_{S}^2 = \cfrac{5 \sqrt{2}g}{9 \pi^2}\, T^{5 / 2} v I_{3 / 2} (y)
+   = \frac{10T I_{3/2}(y)}{9I_{1/2}(y)}.
+\end{equation}
+
+В секциях \ref{sec:asymp_low} и \ref{sec:asymp_high} приводится описание поведения данных величин в различных температурных пределах.
 
 \section{Асимптотики при низких температурах}
 \label{sec:asymp_low}
