@@ -18,6 +18,10 @@ colorlinks,  % цветные гиперссылки
 \usepackage[intlimits]{amsmath}
 \usepackage{amssymb,amsfonts}
 
+\usepackage[toc]{glossaries}
+\makeglossaries
+\include{glossary}
+
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
@@ -172,6 +176,7 @@ colorlinks,  % цветные гиперссылки
 
 % Список литературы
 \printbibliography[heading=bibintoc]
+\printglossaries
 
 % Приложения
 \appendix
