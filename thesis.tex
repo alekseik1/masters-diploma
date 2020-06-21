@@ -1,7 +1,8 @@
 \documentclass[%
 bachelor,    % тип документа
 %natbib,      % использовать пакет natbib для "сжатия" цитирований
-subf,        % использовать пакет subcaption для вложенной нумерации рисунков
+% NOTE: убрал, потому что выдавал Warning при компиляции
+%subf,        % использовать пакет subcaption для вложенной нумерации рисунков
 href,        % использовать пакет hyperref для создания гиперссылок
 colorlinks,  % цветные гиперссылки
 %fixint,     % включить прямые знаки интегралов
@@ -17,6 +18,7 @@ colorlinks,  % цветные гиперссылки
 
 \usepackage[intlimits]{amsmath}
 \usepackage{amssymb,amsfonts}
+\usepackage{icomma}
 
 \usepackage[toc]{glossaries}
 \makeglossaries
@@ -30,12 +32,15 @@ colorlinks,  % цветные гиперссылки
 % TODO: (a.kozharin) Уберите этот импорт в конце работы. Показывает label справа от каждого уравениния <- Tue Jun  9 15:45:05 2020
 \usepackage[left]{showlabels}
 
+% На всякий случай, старая эпсилон
+\newcommand{\epsilonn}{\epsilon}
+\newcommand{\phii}{\phi}
 
 % Русские варианты математических букв
 \renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
 
-% На всякий случай, старая эпсилон
-\newcommand{\epsilonn}{\epsilon}
+\newcommand{\eqdef}{\stackrel{\text{def}}{=}}
 
 % Шрифт Times в тексте как основной
 \usepackage{tempora}
