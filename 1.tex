@@ -341,6 +341,35 @@
 Возможно использование как атомной системы единиц, так и СИ.
 Расчеты можно выполнять в широком диапазоне температур и объемов.
 
+\begin{figure}[!h]
+    % TODO: (a.kozharin) hspace! <- Mon Jun 22 15:42:48 2020
+    \hspace{-1cm}
+  \includegraphics[width=0.5\columnwidth]{img/mu}(a)
+  \includegraphics[width=0.5\columnwidth]{img/p}(б)
+  \caption{Химический потенциал (a) и давление (б) \acrshort{ifg} при постоянном объеме $v$.}
+  \label{fig:chemical_potential}
+\end{figure}
+
+\begin{figure}[!h]
+    % TODO: (a.kozharin) hspace <- Mon Jun 22 15:43:16 2020
+    \hspace{-2cm}
+  \includegraphics[width=1.2\columnwidth]{img/cv_cp}
+  % \caption{Isochoric and isobaric heat capacity of IFG at constant $v$. Red lines---$C_P$, black lines---$C_V$. Solid lines---$v = 0.1$, dashed lines---$v = 1$, dash-dotted lines---$v = 10$. Solid blue line---low-temperature asymptote (\ref{eq:cv_lt}) for $C_V$ and $C_P$ at $v = 0.1$; solid magenta line---high-temperature asymptote (\ref{eq:CVCPhighT}) for $C_V$ at $v = 0.1$; solid organge line---high-temperature asymptote (\ref{eq:CVCPhighT}) for $C_P$ at $v = 0.1$.}
+  \caption{Теплоемкости при постоянном объеме и давлении \acrshort{ifg} для фиксированного $v$.}
+  \label{fig:heat_capacity}
+\end{figure}
+\begin{figure}[!h]
+    % TODO: (a.kozharin) hspace! <- Mon Jun 22 15:43:30 2020
+    \hspace{-1cm}
+  \includegraphics[width=0.5\columnwidth]{img/cp_by_cv}(a)
+  \includegraphics[width=0.5\columnwidth]{img/cs}(б)
+  % \caption{Heat capacity ratio (a) and adiabatic sound velocity (b) of IFG at constant $v$. Black lines: solid---$v = 0.1$, dashed---$v = 1$, dash-dotted---$v = 10$. Dashed red line---high-temperature asymptote for $C_P/C_V$; solid blue line---low-temperature asymptote (\ref{eq:cs2_lt}) at $v = 10$; solid red line---high-temperature asymptote (\ref{eq:CTCShighT}) at $v = 10$.}
+  \caption{
+      Отношение теплоемостей (a) и адиабатическая скорость звука (б) \acrshort{ifg} при постоянном $v$. 
+  }
+  \label{fig:sound_velocity}
+\end{figure}
+
 Из-за упомянутых численных проблемы диапазон допустимого ввода ограничен: $T \in [10^{-49}, 10^{49}]$ для температур и $v \in [10^{-30}, 10^{20}]$ для удельных объемов.
 В этих диапазонах гарантируется точность $\delta = 10^{-7}$ (это было протестировано с использованием фреймворка Hypothesis \cite{MacIver2019Hypothesis}).
 
