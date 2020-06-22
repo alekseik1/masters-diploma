@@ -336,10 +336,22 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
 \label{eq:jel:total_energy_final}
 \begin{aligned}
     E &= E^S + E^L - E^{self} = \\
-    &= \frac{1}{2 \epsilon} \sum_{\vec{n}} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\vec{r_i} - \vec{r_j} + \vec{n}L|} \mathrm{erfc} \left( \frac{ |\vec{r_i} - \vec{r_j} + \vec{n}L| }{ \sqrt{2} \sigma } \right) + \\
-    &+ \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 / 2}}{k^2} | S (\vec{k}) |^2 - \frac{1}{\epsilon} \frac{1}{\sqrt{2\pi} \sigma} \sum_{i=1}^N q_i^2
+    &= \frac{1}{2 \epsilon} \sum_{\vec{n}} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\vec{r_i} - \vec{r_j} + \vec{n}L|}\, \mathrm{erfc} \left( \frac{ |\vec{r_i} - \vec{r_j} + \vec{n}L| }{ \sqrt{2} \sigma } \right) + \\
+    &+ \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 / 2}}{k^2} | S (\vec{k}) |^2 - \frac{1}{\epsilon} \frac{1}{\sqrt{2\pi} \sigma} \sum_{i=1}^N q_i^2.
 \end{aligned}
 \end{equation}
+
+Собирая результаты воедино, получим гамильтониан модели ВЭГ:
+% TODO: (a.kozharin) Подумать, как собрать эту солянку из трех статей в один гамильтониан <- Mon Jun 22 00:30:13 2020
+\begin{equation}
+    \label{eq:jel:ham_final}
+    \begin{aligned}
+        \hat{H} = \sum\limits_{i=1}^{N} \cfrac{\hat{\vec{p}}_{i}^2}{2m}\, +
+        \frac{1}{2 \epsilon} \sum_{\vec{n}} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\hat{\vec{r}}_i - \hat{\vec{r}}_j + \hat{\vec{n}}L|}\, \mathrm{erfc} \left( \frac{ |\hat{\vec{r}}_i - \hat{\vec{r}}_j + \hat{\vec{n}}L| }{ \sqrt{2} \sigma } \right) + \\
+        + \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 / 2}}{k^2} | \hat{S} (\vec{k}) |^2 - \frac{1}{\epsilon} \frac{1}{\sqrt{2\pi} \sigma} \sum_{i=1}^N q_i^2.
+    \end{aligned}
+\end{equation}
+Здесь $\hat{S} (\vec{k}) = \sum\limits_{i=1}^{N} q_{i} e^{i \vec{k} \hat{\vec{r}}_{i}}$, а оператор $\hat{\vec{n}}L$ соответствует координатному сдвигу на целое число ячеек.
 
 \section{Усреднение по направлениям и изотропная модель \texorpdfstring{\acrshort{veg}}{ВЭГ}}
 
