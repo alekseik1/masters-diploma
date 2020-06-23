@@ -354,4 +354,74 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
 Здесь $\hat{S} (\vec{k}) = \sum\limits_{i=1}^{N} q_{i} e^{i \vec{k} \hat{\vec{r}}_{i}}$, а оператор $\hat{\vec{n}}L$ соответствует координатному сдвигу на целое число ячеек.
 
 \section{Усреднение по направлениям и изотропная модель \texorpdfstring{\acrshort{veg}}{ВЭГ}}
+Непосредственное суммирование по Эвальду в том виде, который приведен в секции \ref{sec:ewald}, имеет два практических недостатка:
+\begin{enumerate}
+    \item Вычислительная сложность (нагрузка на процессор компьютера) быстро растет с ростом числа частиц в главной ячейке (как $N^2$).
+    \item Комбинирование дальнодействующего кулоновского взаимодействия с периодическими граничными условиями может привести к появлению неизотропического электрического поля, имеющего кубическую симметрию в кристаллической решетке, составленной из главных ячеек.
+        В этом смысле любая процедура суммирования кулоновских сил может считаться подходящей лишь в том случае, если погрешность результата, вызванная этой искуственной симметрией, пренебрежимо мала.
+\end{enumerate}
+В \cite{jel:pre-averaged_summation} предлагается новый метод суммирования, основанный на предварительном усреднении вдоль всех направлений главной ячейки.
+Предполагается, что ячейка имеет вид куба с объемом $V = L^3$.
 
+Для начала приведем \eqref{eq:jel:total_energy_final} к виду, полученному в оригинальной работе Эвальда \cite{ewald:summation_original}.
+Для этого необходимо сделать замену $\delta = \frac{\sqrt{2} \pi}{\sigma}$, а $| S (\vec{k}) |^2$ явно раскрыть с выделением тригонометрических функций.
+Рассматривая энергию кулоновского взаимодействия $N$ ионов в главной ячейке, получим:
+\begin{equation}
+    \label{eq:mean:E_coloumb_main-cell}
+    E_N = \sum\limits_{i=1}^{N} q_i \phi (\vec{r}_{i}),
+\end{equation}
+где $\phi (\vec{r}_{i})$ ---~ электростатический потенциал $i$-го иона в точке $\vec{r}_{i}$.
+% TODO: (a.kozharin) Вот тут мы просто прыгаем к виду Эвальда. Нет, выкладки стоит самому провести и проверить, если останется время. Но, мне кажется, если считать только энергию главной ячейки и уйти на обозначения Эвальда, то должно быть все ок <- Mon Jun 22 23:53:31 2020
+Согласно \cite{ewald:summation_original}, $\phi$ имеет вид:
+\begin{equation}
+    \label{eq:mean:phi_as_sum}
+    \phi (\vec{r}_{i}) = \phi_1 (\vec{r}_{i}) + \frac{1}{2}\, \sum\limits_{j \neq i}^{N} \phi_2 (\vec{r}_{i}, \vec{r}_{j}),
+\end{equation}
+где в отстутствии внешнего поля $\phi_1$ есть константа:
+\begin{equation}
+    \label{eq:mean:phi_1}
+    \phi_1 = \cfrac{q_{i}}{L}\, \left( \frac{1}{2\pi}\, \sum\limits_{n > 0}^{} \frac{1}{n^2}\, e^{-\pi^2 n^2 / \delta^2} - \cfrac{\delta}{\sqrt{\pi}}\, \right),
+\end{equation}
+а парный потенциал получается следующим:
+\begin{equation}
+    \label{eq:mean:phi_2}
+    \phi_2 = q_{j} \left[ \frac{1}{r_{ij}}\, \mathrm{erfc} \left( \delta \cfrac{r_{ij}}{L}\, \right) + \frac{1}{2\pi L}\, \sum\limits_{\vec{n} > 0}^{} \frac{1}{n^2}\, e^{-\pi^2 n^2 / \delta^2} \cos \left( \frac{2\pi}{L}\, \vec{n} \cdot \vec{r}_{ij} \right) \right].
+\end{equation}
+Здесь $\vec{n} / L$ есть трехмерный взаимный вектор решетки ($n = | \vec{n} |$), $\vec{r}_{ij} = \vec{r}_{i} - \vec{r}_{j}$, $r_{ij} = |\vec{r}_{ij}|$.
+Параметр $\delta / L$ обычно называют параметром Эвальда.
+
+Учитывая, что все направления главной решетки в изотропической жидкости должны быть равноправны, обе части \eqref{eq:mean:phi_2} можно усреднить вдоль всех всех направлений вектора $\vec{n}$.
+Обозначая $\phi_2 (r_{ij}) \equiv \langle \phi_2 (\vec{r}_{ij}) \rangle$, получим:
+\begin{equation}
+    \label{eq:mean:phi_2_averaged}
+    \phi_2 (r_{ij}) = \frac{q_{j}}{r_{ij}} \left[ \mathrm{erfc} \left( \delta \cfrac{r_{ij}}{L}\, \right) + \frac{1}{2\pi^2}\, \sum\limits_{\vec{n} > 0}^{} \frac{1}{n^3}\, e^{-\pi^2 n^2 / \delta^2} \sin \left( \frac{2\pi}{L}\, n r_{ij} \right) \right].
+\end{equation}
+Поскольку $\mathrm{erfc}(x) - 1$ и $\sin (x)$ являются нечетными функциями, возможно следующее разложение в ряд:
+\begin{equation}
+    \label{eq:mean:phi_2_series}
+    \phi_2 (r_{ij}) = \cfrac{q_{j}}{r_{ij}}\, \left( 1 + \sum\limits_{k \geq 0}^{} C_{k} r_{ij}^{2k+1} \right),
+\end{equation}
+где коэффициенты $C_k$ можно найти прямым разложением в ряд Маклорена \eqref{eq:mean:phi_2_averaged} с использованием формулы Эйлера-Маклорена, обобщенной на случай суммирования по трехмерному пространству.
+Это в результате даст \cite{jel:pre-averaged_summation}:
+\begin{equation}
+    \label{eq:mean:C_coeffs}
+    \begin{aligned}
+        C_0 &= \frac{1}{\pi}\, \sum\limits_{\vec{n} > 0}^{} \frac{1}{n^2}\, e^{-\pi^2 n^2 / \delta^2} - \frac{2\delta}{\sqrt{\pi}}\, \\
+        C_1 &= \frac{2\pi}{3 L^3}\, \\
+        C_k &= 0, \quad k > 1
+    \end{aligned}
+\end{equation}
+Если теперь учесть условие электронейтральности, то окажется, что член в \eqref{eq:mean:phi_2_series}, не зависящий от расстояния (пропорциональный $C_0$), уничтожает вклад от $\phi_1$ в \eqref{eq:mean:phi_as_sum}.
+Это означает, что суммарная энергия кулоновского взаимодействия в главной ячейке может быть описана суммой $E_N = \sum_{i=1}^N \phi (r_{ij})$, где
+\begin{equation}
+    \label{eq:mean:phi_final}
+    \phi (r_{ij}) = \frac{q_i q_j}{r_{ij}}\, \left[ 1 + \frac{1}{2}\, \left( \frac{r_{ij}}{r_{m}} \right)^3 \right]
+\end{equation}
+и $r_{m} = (3 / 4 \pi)^{1 / 3} L$ ---~ радиус эквивалентной по объему сферы главной ячейки: $\frac{4}{3} \pi r_{m}^3 = L^3$.
+
+Результат \eqref{eq:mean:phi_final} и есть усредненный по направлениям потенциал.
+Заменяя кулоновскую часть в ранее полученном гамильтониане \eqref{eq:jel:ham_final} на усредненную по направлениям, получим \textit{гамильтониан изотропной модели \acrshort{veg}}:
+\begin{equation}
+    \label{eq:mean:ham_final}
+    \hat{H} = \sum\limits_{i=1}^{N} \frac{\hat{\vec{p}}_{i}^2}{2m}\, + \sum\limits_{\vec{n}}^{} \sum\limits_{i=1}^{N} \frac{q_{i} q_{j} }{r_{ij} }\, \left[ 1 + \frac{1}{2}\, \left( \frac{r_{ij} }{r_{m} } \right)^3 \right]
+\end{equation}
