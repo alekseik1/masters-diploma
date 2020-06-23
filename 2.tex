@@ -109,7 +109,7 @@
 Для полученной свертки имеем:
 \begin{equation}
     \label{eq:ewald:rho_tot_conv_prod}
-    \tilde{\rho}_{tot}(\vec{k}) = \tilde{L}(\vec{k}) \tilde{\rho}_{u c}(\vec{k})
+    \tilde{\rho}_{tot}(\vec{k}) = \tilde{L}(\vec{k}) \tilde{\rho}_{u c}(\vec{k}),
 \end{equation}
 где тильдами обозначены Фурье-образы.
 
@@ -156,7 +156,7 @@
 
 Формула \eqref{eq:ewald:energy_final} есть основной результат.
 Фурье-образ $\tilde{\rho}_{uc} (\vec{k})$ можно подсчитать, к примеру, алгоритмами \acrshort{bpf} (\textit{англ.} \acrshort{fft}).
-Как только $\tilde{\rho}_{uc} (\vec{k})$ подсчитан, суммирование (или интегрирование) по $\vec{k}$ становится простым и приобретает быструю сходимость.
+Если найден фурье-образ $\tilde{\rho}_{uc} (\vec{k})$, то суммирование (или интегрирование) по $\vec{k}$ становится простым и приобретает быструю сходимость.
 Стоит отметить, что используемая примитивная ячейка должна быть электронейтральной во избежание бесконечных сумм.
 
 На практике суммирование \eqref{eq:ewald:energy_final} ведется в конечном диапазоне значений $m_1$, $m_2$, $m_3$.
@@ -164,24 +164,23 @@
 Оценку возникающих из-за отбрасывания ошибок можно найти, например, в \cite{ewald:errors_study}.
 
 \section{Гамильтониан модели \texorpdfstring{\acrshort{veg}}{ВЭГ}}
-Взаимодействующий электронный газ (\acrshort{veg}) ---~ это физическая модель электронного газа, в которой учитывается взаимодействие между ионами одинакового и противоположного знаков.
-В данной работе рассматривается важный частный случай этой модели ---~ так называемая модель <<желе>>.
-В этой модели компенсирующий фон (положительного заряда) полностью компенсирует заряд электронов (так, чтобы суммарный заряд системы был равен нулю) и предполагается однородным и несжимаемым.
+Взаимодействующий электронный газ (\acrshort{veg}) ---~ это физическая модель электронного газа, в которой учитывается электростатическое взаимодействие между всеми зарядами в системе.
+В данной работе рассматривается важный частный случай этой модели~--- так называемая модель <<желе>>, в которой электронейтральность обеспечивается компенсирующим фоном положительного заряда с постоянной полностью (так, чтобы суммарный заряд системы был равен нулю). Фон предполагается однородным и несжимаемым.
 
 \textit{При изложении данной главы будем использовать систему единиц СГС.}
 
-Для модели <<желе>> из $N$ электронов, заключенных в объеме $V$, имеющих плотность $\rho (\vec{r}) = \sum_{i=1}^{N} \delta(\vec{r}-\vec{r_i})$ при плотности фоновых зарядов $n(\vec{R}) = N/V$, гамильтониан имеет вид \cite{jel:mahan_hamiltonian}:
+Для модели <<желе>> из $N$ электронов, заключенных в объеме $V$, имеющих концентрацию $\rho (\vec{r}) = \sum_{i=1}^{N} \delta(\vec{r}-\vec{r_i})$ при концентрации фоновых зарядов $n(\vec{R}) = N/V$, гамильтониан имеет вид \cite{jel:mahan_hamiltonian}:
 
 \begin{equation}
     \label{eq:jel:ham_four_sum}
     \hat{H}=\hat{H}_{e l}+\hat{H}_{b a c k}+\hat{H}_{e l-b a c k}.
 \end{equation}
-Здесь $\hat{H}_{e l}$ ---~ это электронный гамильтониан, состоящий энергии кинетической и электрон-электронного отталкивания:
+Здесь $\hat{H}_{e l}$ ---~ это электронный гамильтониан, состоящий из кинетической энергии и электрон-электронного отталкивания:
 \begin{equation}
     \label{eq:jel:ham_el_def}
     \hat{H}_{e l}=\sum_{i=1}^{N} \frac{\hat{\vec{p}}_i^2}{2 m}+\sum_{i<j}^{N} \frac{e^{2}}{\left|\hat{\vec{r}}_{i}-\hat{\vec{r}}_{j}\right|}.
 \end{equation}
-
+%
 $\hat{H}_{b a c k}$ есть гамильтониан положительного фонового заряда, описывающий его взаимодействие с самим собой. Усредненное значение $\hat{H}_{b a c k}$ есть:
 \begin{equation}
     \label{eq:jel:ham_back_expect}
@@ -189,25 +188,18 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
     = \frac{e^{2}}{2} \int_{V} d \vec{R} \int_{V} d \vec{R}' \frac{n(\vec{R}) n\left(\vec{R}'\right)}{\left|\vec{R}-\vec{R}'\right|}
     = \frac{N^{2}}{2 V} \lim _{\mathbf{q} \rightarrow 0} v_{q},
 \end{equation}
-где введена Фурье-компонента кулоновского потенциала $v_{q}=\frac{4 \pi e^{2}}{q^{2}}$.
-
-Вклад электростатического взаимодействия электрона с фоном описывается $H_{el-back}$:
-\begin{equation}
+где введена фурье-компонента кулоновского потенциала $v_{q}=\frac{4 \pi e^{2}}{q^{2}}$.
+%
+Вклад электростатического взаимодействия электрона с фоном описывается членом $H_{el-back}$:
+\begin{multline}
     \label{eq:jel:ham_el-back_expect}
     \left\langle\hat{H}_{e l-b a c k}\right\rangle
-    = -\int_{V} d \vec{r} \int_{V} d \vec{R}\, \frac{e^{2} \rho(\vec{r}) n(\vec{R})}{|\vec{r}-\vec{R}|}
+    = -\int_{V} d \vec{r} \int_{V} d \vec{R}\, \frac{e^{2} \rho(\vec{r}) n(\vec{R})}{|\vec{r}-\vec{R}|} = {} \\
     = -\frac{N^{2}}{V} \lim _{\mathbf{q} \rightarrow 0} v_{q}
     = -2 \left\langle\hat{H}_{b a c k}\right\rangle.
-\end{equation}
+\end{multline}
 
 Для конечных систем результаты \eqref{eq:jel:ham_back_expect} и \eqref{eq:jel:ham_el-back_expect} получаются конечными, поскольку $q$ достигает отличное от нуля минимальное значение, зависящее от объема системы.
-
-% README
-\textcolor{red}{\textit{
-    во Филинове рассказывают еще, как члены $H_{el-back}$, $H_{back}$ и аналогичного вклада от электронов друг друга полностью компенсируют.
-    Затем говорят, что из членов взаимодействия остается только энергия электронных корелляций (т.е. флуктуаций плотности).
-    Я не уверен, нужно ли это включать в статью, т.к. дальше этот результат нигде не используется. 
-}}
 
 Для систем с периодическими граничными условиями суммирование кулоновского взаимодействия можно провести упомянутым выше методом Эвальда (см. раздел \ref{sec:ewald}).
 Учтем также возможное размытие заряда относительно его равновесного положения в форме функции Гаусса \cite{jel:blinov}.
@@ -216,7 +208,7 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
 
 \begin{equation}
     \label{eq:jel:phi_no_j}
-    \phi_{-j}(\vec{r})=\frac{1}{\varepsilon} \sum_{\vec{n}} \sum_{i=1}^{N} {}^\prime \frac{q_{i}}{\left|\vec{r}-\vec{r}_{i}+\vec{n} L\right|}
+    \phi_{-j}(\vec{r})=\frac{1}{\varepsilon} \sum_{\vec{n}} \sum_{i=1}^{N} {}^\prime \frac{q_{i}}{\left|\vec{r}-\vec{r}_{i}+\vec{n} L\right|},
 \end{equation}
 где штрих у суммы обозначает, что $i \neq j$ при $\vec{n} = 0$.
 Здесь $q_i$ указан для того, чтобы получающиеся результаты не были привязаны к типам и значениям зарядов.
@@ -240,8 +232,8 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
 \begin{equation}
 \label{eq:jel:rho_separation}
 \begin{aligned}
-    \rho_i (\vec{r}) & = \rho_i^S (\vec{r}) + \rho_i^L (\vec{r}) \\
-    \rho_i^S (\vec{r}) & = q_i \delta(\vec{r} - \vec{r_i}) - q_i G_\sigma (\vec{r} - \vec{r_i}) \\
+    \rho_i (\vec{r}) & = \rho_i^S (\vec{r}) + \rho_i^L (\vec{r}), \\
+    \rho_i^S (\vec{r}) & = q_i \delta(\vec{r} - \vec{r_i}) - q_i G_\sigma (\vec{r} - \vec{r_i}), \\
     \rho_i^L (\vec{r}) & = q_i G_\sigma (\vec{r} - \vec{r_i}),
 \end{aligned}
 \end{equation}
@@ -274,7 +266,7 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
 \begin{equation}
 \label{eq:jel:phi_S_solution}
 \begin{aligned}
-    \phi_i^S (\vec{r}) &= \frac{1}{\epsilon} \frac{q_i}{|\vec{r} -\vec{r_i}|}\, \mathrm{erfc} \left[ \frac{|\vec{r} - \vec{r_i}|}{\sqrt{2} \sigma} \right] \\
+    \phi_i^S (\vec{r}) &= \frac{1}{\epsilon} \frac{q_i}{|\vec{r} -\vec{r_i}|}\, \mathrm{erfc} \left[ \frac{|\vec{r} - \vec{r_i}|}{\sqrt{2} \sigma} \right], \\
     \phi_i^L (\vec{r}) &= \frac{1}{\epsilon} \frac{q_i}{|\vec{r} -\vec{r_i}|}\, \mathrm{erf} \left[ \frac{|\vec{r} - \vec{r_i}|}{\sqrt{2} \sigma} \right],
 \end{aligned}
 \end{equation}
@@ -287,7 +279,7 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
     E^S = \frac{1}{2} \sum_{i=1}^N q_i \phi_{-i}^S (\vec{r_i})
     = \frac{1}{2\epsilon} \sum_\vec{n} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\vec{r_i} - \vec{r_j} + \vec{n}L|}\, \mathrm{erfc} \left( \frac{|\vec{r_i} - \vec{r_j} + \vec{n}L|}{\sqrt{2}\sigma} \right).
 \end{equation*}
-Это выражение аналогично исходному лишь с той разницей, что сумма обрзеается функцией $\mathrm{erfc}$, что упрощает расчет.
+Это выражение аналогично исходному лишь с той разницей, что сумма обрезается функцией $\mathrm{erfc}$, что упрощает расчет.
 
 Используя $\mathrm{erfc} (x) \xrightarrow[x \rightarrow 0]{} \frac{2}{\sqrt{\pi}} x$, можно получить для $E^{self}$:
 \begin{equation}
@@ -298,7 +290,7 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
 Таким образом, осталось посчитать третью, дальнодействующую, часть.
 Как было отмечено в разделе \ref{sec:ewald}, дальнодействующая часть считается в обратном пространстве.
 
-Записывая периодичность структуры в виде:
+Записывая плотность заряда в виде суммы по всем зарядам системы, периодически повторяющимся в пространстве:
 \begin{equation*}
     \rho^L (\vec{r}) = \sum_\vec{n} \sum_{j=1}^N q_j G_\sigma (\vec{r} - \vec{r_j} + \vec{n}L),
 \end{equation*}
@@ -319,14 +311,14 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
     \label{eq:jel:phi_L_spatial}
     \phi^L (\vec{r}) = \frac{4\pi}{V \epsilon} \sum_{\vec{k} \neq 0} \sum_{j=1}^N \frac{q_j}{k^2}\, e^{i \vec{k} (\vec{r} - \vec{r_j})} e^{-\sigma^2 k^2 / 2}.
 \end{equation}
-Вклад члена $\vec{k} = 0$ нулевой, так как полный заряд примитивной ячейки предполагается нулевым.
+Вклад члена с $\vec{k} = 0$ нулевой, так как полный заряд примитивной ячейки предполагается нулевым.
 Для энергии $E^L$ получаем:
 \begin{equation}
     \label{eq:jel:E_L_final}
     E^L = \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \sum_{i=1}^N \sum_{j=1}^N \frac{q_i q_j}{k^2} e^{i \vec{k} (\vec{r_i} - \vec{r_j})} e^{-\sigma^2 k^2 / 2}.
 \end{equation}
 
-Определяя структурный фактор $S (\vec{k}) = \sum_{i=1}^N q_i e^{i\vec{k} \vec{r_i}}$, дальнодействующую часть энергии возможно переписать:
+Определяя структурный фактор $S (\vec{k}) = \sum_{i=1}^N q_i e^{i\vec{k} \vec{r_i}}$, дальнодействующую часть энергии возможно переписать в виде:
 \begin{equation}
     \label{eq:jel:E_L_from_S}
     E^L = \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 /2}}{k^2} | S (\vec{k}) |^2
@@ -343,14 +335,12 @@ $\hat{H}_{b a c k}$ есть гамильтониан положительног
 
 Собирая результаты воедино, получим гамильтониан модели ВЭГ:
 % TODO: (a.kozharin) Подумать, как собрать эту солянку из трех статей в один гамильтониан <- Mon Jun 22 00:30:13 2020
-\begin{equation}
+\begin{multline}
     \label{eq:jel:ham_final}
-    \begin{aligned}
         \hat{H} = \sum\limits_{i=1}^{N} \cfrac{\hat{\vec{p}}_{i}^2}{2m}\, +
-        \frac{1}{2 \epsilon} \sum_{\vec{n}} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\hat{\vec{r}}_i - \hat{\vec{r}}_j + \hat{\vec{n}}L|}\, \mathrm{erfc} \left( \frac{ |\hat{\vec{r}}_i - \hat{\vec{r}}_j + \hat{\vec{n}}L| }{ \sqrt{2} \sigma } \right) + \\
-        + \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 / 2}}{k^2} | \hat{S} (\vec{k}) |^2 - \frac{1}{\epsilon} \frac{1}{\sqrt{2\pi} \sigma} \sum_{i=1}^N q_i^2.
-    \end{aligned}
-\end{equation}
+        \frac{1}{2 \epsilon} \sum_{\vec{n}} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\hat{\vec{r}}_i - \hat{\vec{r}}_j + \hat{\vec{n}}L|}\, \mathrm{erfc} \left( \frac{ |\hat{\vec{r}}_i - \hat{\vec{r}}_j + \hat{\vec{n}}L| }{ \sqrt{2} \sigma } \right) + {} \\
+        {} + \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 / 2}}{k^2} | \hat{S} (\vec{k}) |^2 - \frac{1}{\epsilon} \frac{1}{\sqrt{2\pi} \sigma} \sum_{i=1}^N q_i^2.
+\end{multline}
 Здесь $\hat{S} (\vec{k}) = \sum\limits_{i=1}^{N} q_{i} e^{i \vec{k} \hat{\vec{r}}_{i}}$, а оператор $\hat{\vec{n}}L$ соответствует координатному сдвигу на целое число ячеек.
 
 \section{Усреднение по направлениям и изотропная модель \texorpdfstring{\acrshort{veg}}{ВЭГ}}
