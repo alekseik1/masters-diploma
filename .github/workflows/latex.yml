@@ -27,7 +27,7 @@ jobs:
         name: my_doc
         # Путь до собранного pdf. Может содержать “*”, “**”
         # Здесь это <working_directory>/<jobname>.pdf
-        path: ./thesis.pdf
+        path: ./my_doc.pdf
   deploy:
     runs-on: ubuntu-latest
     # Деплой будет только на ветке master. Закомментируйте, если не надо
