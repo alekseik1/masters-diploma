@@ -17,7 +17,7 @@ jobs:
         working_directory: ./
         # Аргументы, к которыми запускать компилятор (latexmk)
         # -jobname=<name> дает возможность поменять имя выходного файла
-        args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+        args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode -shell-escape
         compiler: latexmk
     # Загружаем собранные pdf-файлы
     - name: Upload pdf document
