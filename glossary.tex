@@ -4,4 +4,52 @@
 
 \newacronym{mcc}{MCC}{Multiclass classification}
 \newacronym{ovr}{OvR}{One-vs.-rest}
-\newacronym{ml_ru}{ML}{Машинное обучение}
+\newacronym{ovo}{OvO}{One-vs.-one}
+\newacronym{ml}{ML}{Машинное обучение}
+\newacronym{tf_idf}{TF-IDF}{Term frequency - Inverse Document Frequency}
+\newglossaryentry{sup_learning}
+{
+    name=supervised learning,
+    description={Постановка задачи, при которой существует т.н. \textit{обучающая выборка}, в которой у каждого элемента известна целевая переменная}
+}
+
+\newglossaryentry{semisup_learning}
+{
+    name=semi-supervised learning,
+    description={Постановка задачи, при которой существует выборка, состоящая из $l$ элементов с известной разметкой и $u$ элементов с неизвестной разметкой}
+}
+\newglossaryentry{unsup_learning}
+{
+    name=unsupervised learning,
+    description={Постановка задачи, при которой не существует выборки с заранее известной целевой переменной}
+}
+\newglossaryentry{binary_classification}
+{
+    name=binary classification,
+    description={Задача классификации с $\mathbb{Y} = \{0, 1\}$}
+}
+\newglossaryentry{linear_classifier}
+{
+    name=linear classifier,
+    description={Классификатор вида $y = f\left( \sum\limits_{j}^{} w_j x_j \right)$}
+}
+\newglossaryentry{svm}
+{
+    name=support vector machine,
+    description={Метод классификации, основанный на пострении разделяющей гиперплоскости так, чтобы отступ от плоскости до объектов разных классов был максимален}
+}
+\newglossaryentry{soft_margin}
+{
+    name=soft margin,
+    description={Метод классификации, основанный на пострении разделяющей гиперплоскости так, чтобы отступ от плоскости до объектов разных классов был максимален}
+}
+\newglossaryentry{kernel}
+{
+    name=kernel,
+    description={Функция вида $K(x, y) = \vec{\phi(\vec{x})} \cdot \vec{\phi(\vec{y})}$, использующаяся для улучшения качества на нелинейных зависимостях между входными данными и целевой переменной}
+}
+\newglossaryentry{hyperparameters}
+{
+    name=hyperparameters,
+    description={Набор численных параметров, которые нельзя оптимизировать на основе обучающей выборки}
+}
