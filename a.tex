@@ -1,69 +1,69 @@
 %!TEX root = thesis.tex"`
 
-\chapter{Пример расчета\\ термодинамических свойств \texorpdfstring{\acrshort{ifg}}{ИФГ}}
-Модуль легко ставится через \Gls{pypi}:
-\begin{minted}{bash}
-$ pip install numpy
-$ pip install ifg
-\end{minted}
+% \chapter{Пример расчета\\ термодинамических свойств \texorpdfstring{\acrshort{ifg}}{ИФГ}}
+% Модуль легко ставится через \Gls{pypi}:
+% \begin{minted}{bash}
+% $ pip install numpy
+% $ pip install ifg
+% \end{minted}
 
-Основной функционал содержится в классе \texttt{IfgCalculator}.
-\begin{minted}{Python}
-from ifg import IfgCalculator
-import numpy as np
-specific_volumes = [0.33, 1., 10.,]
-temperatures = np.linspace(1e-4, 1e4, 10**6)
-calculator = IfgCalculator(
-    temperatures=temperatures,
-    specific_volumes=specific_volumes,
-    input_in_si=False,  # False даст в атомной системе
-    output_in_si=False
-)
-\end{minted}
-После этого все свойства будут доступны как поля экземпляра \texttt{calculator}:
-\begin{minted}{Python}
->>> calculator.p
-array([[1.21465823e+01, 1.91415600e+00, 4.12392425e-02],
-       [1.21466330e+01, 1.91419106e+00, 4.12555143e-02],
-       [1.21467832e+01, 1.91429487e+00, 4.13036646e-02],
-       ...,
-       [3.03030975e+04, 9.99999392e+03, 9.99998139e+02],
-       [3.03031278e+04, 1.00000039e+04, 9.99999139e+02],
-       [3.03031581e+04, 1.00000139e+04, 1.00000014e+03]])
->>> calculator.C_P
-array([[4.92449475e-05, 1.03122265e-04, 4.78651124e-04],
-       [4.97374654e-03, 1.04153735e-02, 4.83453163e-02],
-       [9.89825789e-03, 2.07277142e-02, 9.62203561e-02],
-       ...,
-       [2.49998418e+00, 2.49999478e+00, 2.49999948e+00],
-       [2.49998418e+00, 2.49999478e+00, 2.49999948e+00],
-       [2.49998418e+00, 2.49999478e+00, 2.49999948e+00]])
-\end{minted}
-Во втором примере видим, как теплоемкость $C_P$ стремится к $5/2$ при высоких температурах ---~ ожидаемое поведение для \acrshort{ifg}.
+% Основной функционал содержится в классе \texttt{IfgCalculator}.
+% \begin{minted}{Python}
+% from ifg import IfgCalculator
+% import numpy as np
+% specific_volumes = [0.33, 1., 10.,]
+% temperatures = np.linspace(1e-4, 1e4, 10**6)
+% calculator = IfgCalculator(
+%     temperatures=temperatures,
+%     specific_volumes=specific_volumes,
+%     input_in_si=False,  # False даст в атомной системе
+%     output_in_si=False
+% )
+% \end{minted}
+% После этого все свойства будут доступны как поля экземпляра \texttt{calculator}:
+% \begin{minted}{Python}
+% >>> calculator.p
+% array([[1.21465823e+01, 1.91415600e+00, 4.12392425e-02],
+%        [1.21466330e+01, 1.91419106e+00, 4.12555143e-02],
+%        [1.21467832e+01, 1.91429487e+00, 4.13036646e-02],
+%        ...,
+%        [3.03030975e+04, 9.99999392e+03, 9.99998139e+02],
+%        [3.03031278e+04, 1.00000039e+04, 9.99999139e+02],
+%        [3.03031581e+04, 1.00000139e+04, 1.00000014e+03]])
+% >>> calculator.C_P
+% array([[4.92449475e-05, 1.03122265e-04, 4.78651124e-04],
+%        [4.97374654e-03, 1.04153735e-02, 4.83453163e-02],
+%        [9.89825789e-03, 2.07277142e-02, 9.62203561e-02],
+%        ...,
+%        [2.49998418e+00, 2.49999478e+00, 2.49999948e+00],
+%        [2.49998418e+00, 2.49999478e+00, 2.49999948e+00],
+%        [2.49998418e+00, 2.49999478e+00, 2.49999948e+00]])
+% \end{minted}
+% Во втором примере видим, как теплоемкость $C_P$ стремится к $5/2$ при высоких температурах ---~ ожидаемое поведение для \acrshort{ifg}.
 
-Можно также проверить, что давление стремится к конечному пределу при низких температурах.
-Изменим входные данные:
-\begin{minted}{Python}
-temperatures = np.linspace(1e-10, 1e-8, 10**4)
-calculator = IfgCalculator(
-    temperatures=temperatures,
-    specific_volumes=specific_volumes,
-    input_in_si=False,
-    output_in_si=False
-)
-\end{minted}
-А затем запустим расчет давления:
-\begin{minted}{Python}
->>> calculator.p
-array([[12.14658227,  1.914156  ,  0.04123924],
-       [12.14658227,  1.914156  ,  0.04123924],
-       [12.14658227,  1.914156  ,  0.04123924],
-       ...,
-       [12.14658227,  1.914156  ,  0.04123924],
-       [12.14658227,  1.914156  ,  0.04123924],
-       [12.14658227,  1.914156  ,  0.04123924]])
-\end{minted}
-Получены конечные пределы.
+% Можно также проверить, что давление стремится к конечному пределу при низких температурах.
+% Изменим входные данные:
+% \begin{minted}{Python}
+% temperatures = np.linspace(1e-10, 1e-8, 10**4)
+% calculator = IfgCalculator(
+%     temperatures=temperatures,
+%     specific_volumes=specific_volumes,
+%     input_in_si=False,
+%     output_in_si=False
+% )
+% \end{minted}
+% А затем запустим расчет давления:
+% \begin{minted}{Python}
+% >>> calculator.p
+% array([[12.14658227,  1.914156  ,  0.04123924],
+%        [12.14658227,  1.914156  ,  0.04123924],
+%        [12.14658227,  1.914156  ,  0.04123924],
+%        ...,
+%        [12.14658227,  1.914156  ,  0.04123924],
+%        [12.14658227,  1.914156  ,  0.04123924],
+%        [12.14658227,  1.914156  ,  0.04123924]])
+% \end{minted}
+% Получены конечные пределы.
 
-Больше примеров можно найти по ссылке \url{https://ifg-py.readthedocs.io/en/latest/class_desc.html}.
-Код графиков \ref{fig:chemical_potential}, \ref{fig:heat_capacity}, \ref{fig:sound_velocity} доступен в репозитории: \url{https://github.com/alekseik1/ifg-py/tree/master/examples/plots}.
+% Больше примеров можно найти по ссылке \url{https://ifg-py.readthedocs.io/en/latest/class_desc.html}.
+% Код графиков \ref{fig:chemical_potential}, \ref{fig:heat_capacity}, \ref{fig:sound_velocity} доступен в репозитории: \url{https://github.com/alekseik1/ifg-py/tree/master/examples/plots}.

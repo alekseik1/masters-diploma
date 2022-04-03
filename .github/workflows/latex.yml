@@ -59,7 +59,7 @@ jobs:
           # Получим теги вида “my_doc-<дата билда>-<первые 8 символов из sha коммита>
           tag_name: diploma-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
           # Имя, которое будет высвечиваться в релизе
-          release_name: My Actions document (version ${{ steps.vars.outputs.date }})
+          release_name: Masters diploma (version ${{ steps.vars.outputs.date }})
           # Наш релиз не набросок и не пререлиз, так что оба в false
           draft: false
           prerelease: false

@@ -22,13 +22,11 @@ colorlinks,  % цветные гиперссылки
 \renewcommand\thesubfigure{\asbuk{subfigure}}
 
 
-\usepackage[toc]{glossaries}
-\makeglossaries
-\include{glossary}
 
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
+\include{glossary}
 \ifpdf\usepackage{epstopdf}\fi
 \usepackage[autostyle]{csquotes}
 % TODO: (a.kozharin) Уберите этот импорт в конце работы. Показывает label справа от каждого уравениния <- Tue Jun  9 15:45:05 2020
@@ -91,7 +89,7 @@ colorlinks,  % цветные гиперссылки
 % Включать подсекции в оглавление
 \setcounter{tocdepth}{2}
 
-\graphicspath{{fig/}}
+\graphicspath{{img/}}
 
 \begin{document}
 
@@ -104,26 +102,26 @@ colorlinks,  % цветные гиперссылки
 % Титульный лист на русском языке
 %
 
-\institution{Московский физико-технический институт}
+\institution{Федеральное государственное автономное образовательное учереждение высшего образования <<Московский физико-технический институт (государственный университет)>>}
 
 % Имя лица, допускающего к защите (зав. кафедрой)
-\apname{В.Е. Фортов}
+\apname{А.Г. Тормасов}
 
-\title{ВЫПУСКНАЯ РАБОТА\\БАКАЛАВРА}
+\title{ВЫПУСКНАЯ РАБОТА\\МАГИСТРА}
 
-\topic{Программная реализация метода функционала плотности для взаимодействующего электронного газа на однородном компенсирующем фоне}
+\topic{Разработка и автоматизация классификатора документов с поддержкой нескольких локализаций}
 
 % Автор
 \author{Кожарин Алексей Сергеевич}
 % Группа
-\group{642б}
+\group{М05-002а}
 % Номер специальности
-\coursenum{03.03.01}
+\coursenum{03.04.01}
 % Название специальности
 \course{Прикладная математика и физика}
 
 % Научный руководитель
-\sa      {Левашов Павел Ремирович}
+\sa      {Кулага Андрей Александрович}
 \sastatus{к.~ф.-м.~н.}
 
 % Город и год
@@ -180,16 +178,16 @@ colorlinks,  % цветные гиперссылки
 % Глава 1
 \input{1}
 % Глава 2
-\input{2}
+% \input{2}
 % Глава 3
-\input{3}
+% \input{3}
 
 % Заключение
 \input{concl}
 
 % Список литературы
 \printbibliography[heading=bibintoc]
-\printglossaries
+\printnoidxglossaries
 
 % Приложения
 \appendix
