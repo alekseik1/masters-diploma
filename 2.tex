@@ -1,445 +1,109 @@
 %!TEX root = thesis.tex"`
 
-\chapter{Модель взаимодействующего электронного газа на однородном компенсирующем фоне}
+\chapter{\Gls{pipeline} обучения}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{pipeline}
+    \caption{Схематичное изображение процесса обучения}
+    \label{fig:pipeline}
+\end{figure}
 
-\section{Классическая модель однокомпонентной плазмы}
-Классическая модель однокомпонентной плазмы (\acrshort{okp}) ~--- это модель точечных ионов, помещенных для обеспечения электронейтральности в равномерно распределенную среду заряда противоположного знака.
-% TODO: Не уверен, стоит ли оставлять примеры
-Такая модель является хорошим приближением для плазмы сверхвысоких давлений, реализующихся, например, в центре белых карликов и тяжелых планет типа Юпитера.
-В этих случаях под действием давления вещество полностью ионизовано, а вырожденные электроны обладают достаточной кинетической энергией $\epsilon_k \approx \epsilon_F$, чтобы образовать почти однородное фоновое распределение зарядовой плотности.
-Модель \acrshort{okp} является простейшей нетривиальной моделью плазмы, так как вид потенциала взаимодействия здесь не вызывает сомнений, а отсутствие квантовых эффектов позволяет исключить из рассмотрения образование связанных состояний (молекул, атомов, ионов) и влияние вырождения и интерференции. Важным свойством модели \acrshort{okp} является зависимость ее свойств только от одного параметра $\gamma = q_i^2/(kT\bar{r})$ в силу однородности кулоновского потенциала, где $q_i$~--- заряд иона, $\bar{r}$~--- среднее расстояние между ионами, обычно определяемое соотношением $4\pi\bar{r}^3/3 = 1/n_i$, $n_i$~--- концентрация ионов.  Более подробно с моделью и ее основными результатами можно ознакомиться в \cite{Fortov:neid_plasma}.
-
-Большое количество результатов по \acrshort{okp} получено методом Монте-Карло.
-Основным параметром в этих результатах является бинарная корреляционная функция $g(r)$.
-На ее основании возможно вычислить внутреннюю энергию:
-\begin{equation}
-    \label{eq:internal_energy_g}
-    u=3 n_{\mathrm{i}} k T / 2+u_{\text{кор}},
-\end{equation}
-\begin{equation}
-    \label{eq:u_corr_g}
-    u_{\text{кор}} /\left(n_{\mathrm{i}} k T\right)=\left(n_{\mathrm{i}} / 2 k T\right) \int d \mathbf{r}\left(Z^{2} e^{2} / r\right)[g(r)-1].
-\end{equation}
-
-Результаты вычислений методом Монте-Карло для $1 \leq \gamma \leq 160$ были аппроксимированы в \cite{Slattery:u_corr_approximation} с погрешностью $3 \cdot 10^{-5}$ следующим выражением:
-\begin{equation}
-    \label{eq:u_corr_approx}
-    u_{\text{кор}} /\left(n_{\mathrm{i}} k T\right)=a \gamma+b \gamma^{1 / 4}+c \gamma^{-1 / 4}+d
-\end{equation}
-где $a=-0,89752$, $b=0,94544$, $c=0,17954$, $d=-0,80049$.
-
-Давление можно получить по теореме вириала $p V = u/3$.
-\begin{equation}
-    \label{eq:p_approx}
-    p = \cfrac{u}{3V}
-    = \cfrac{n_\mathrm{i} kT}{3V} \left( \frac{3}{2}
-    + a \gamma + b \gamma^{1/4} + c \gamma^{-1/4} + d \right)
-\end{equation}
-Интегрируя \eqref{eq:u_corr_approx} по $\gamma$, можно получить свободную энергию \acrshort{okp}:
-\begin{multline}
-    \label{eq:f-density-gas-approx}
-    f=F /\left(n_{\mathrm{i}} k T\right) = \\
-    =a \gamma+4\left(b \gamma^{1 / 4}-c \gamma^{-1 / 4}\right)+(d+3) \ln \gamma-(a+4 b-4 c+1,135)
-\end{multline}
-
-Заметим, что в соответствии с \eqref{eq:p_approx} высокое значение $\gamma$ приводит к отрицательному давлению компонента (поскольку $a < 0$).
-Это не приводит к неустойчивости \acrshort{okp}: полное давление оказывается положительным за счет большого давления электронного газа.
-
-Для \acrshort{okp} возможно явление кристаллизации, впервые рассмотренное Вигнером в \cite{Wigner:plasma_condensation}.
-Было показано, что классический электронный газ с концентрацией $n_e$ на фоне компенсирующего заряда должен при достаточно низких концентрациях образовывать упорядоченную структуру.
-Это вызвано тем, что стабилизирующая решетку кулоновская энергия $V_{\mathrm{C}} \sim e^{2} n_{\mathrm{e}}^{1 / 3} \sim e^{2} / \bar{r}$ при расширении плазмы уменьшается медленнее, чем разрушающая решетку кинетическая энергия $\varepsilon_\text{к} \sim \varepsilon_{F} \sim \hbar^{2} n_{\mathrm{e}}^{2 / 3} / 2 m$.
-Поэтому при малых плотностях кинетическая энергия $\varepsilon_\text{к} \sim n_{\mathrm{e}}^{2 / 3}$ становится меньше потенциальной $V_{\mathrm{C}} \sim n_{\mathrm{e}}^{1 / 3}$ и не способна разрушить упорядоченную структуру электронов, возникшую из-за отталкивания.
-
-В работе \cite{Slattery:u_corr_approximation} были получены результаты вычислений для кристаллической \acrshort{okp} с объемно-центрированной решеткой. Избыточная энергия при $160~\lesssim~\gamma~\lesssim~300$ в \cite{Slattery:u_corr_approximation} аппроксимирована выражением:
-\begin{equation}
-    \label{eq:u_corr_solid_approx}
-    u_{\text{кор}} / n_{\mathrm{i}} k T=a_{\mathrm{BCC}} \gamma+\frac{3}{2}\, b \gamma^{-2}=0,895929 \gamma+1,5+2980 / \gamma^{2}
-\end{equation}
-Из выражения \eqref{eq:u_corr_solid_approx} следует выражение для плотности свободной энергии решетки:
-\begin{equation}
-    \label{eq:f-density-solid-approx}
-    f(\gamma)=-0,895929+9 \gamma / 2-1,8856-1490 / \gamma^{2}.
-\end{equation}
-Зависимости свободных энергий газовой \eqref{eq:f-density-gas-approx} и твердой \eqref{eq:f-density-solid-approx} фаз пересекаются при $\gamma_m = 165$ \cite{Slattery:u_corr_approximation}.
-При этом значении параметра неидеальности происходит вигнеровская кристаллизация \acrshort{okp}.
-
-\section{Суммирование Эвальда}
-\label{sec:ewald}
-Для расчета энергии в системах с дальнодействующими потенциалами широко используется метод суммирования по Эвальду \cite{ewald:summation_original}.
-В данном методе потенциал взаимодействия разбивается на два слагаемых: короткодействующее и дальнодействующее.
-Первое слагаемое вычисляется в действительном пространстве, в то время как для расчета второго используется преобразование Фурье.
-По сравнению с прямым подсчетом данный метод дает быструю сходимость по энергии, что обеспечивает высокую точность и скорость расчетов.
-
-Более подробно, в методе суммирования по Эвальду предлагается переписать потенциал взаимодействия $\phi(\vec{r})$ в виде:
-\begin{equation}
-    \label{eq:ewald:potention_def}
-    \phi(\vec{r}) \eqdef \phi_{sr}(\vec{r})+\phi_{lr}(\vec{r}),
-\end{equation}
-где $\phi_{sr}(\vec{r})$ отвечает за короткодействующую часть, энергия которой быстро сходится, а $\phi_{lr}(\vec{r})$ соответствует дальнодействующей части, энергия которой суммируется в Фурье-пространстве.
-
-Предполагается, что энергия короткодействующей части потенциала суммируется непосредственно и основная проблема состоит в суммировании дальнодействующего вклада в потенциал.
-Также из-за использования Фурье-преобразования метод неявно подразумевает, что рассматриваемая система является бесконечно периодической, что является разумным предположением для кристаллических структур.
-
-Будем называть примитивной ячейкой минимальную повторяющуюся часть периодической системы.
-Также для определенности выберем одну ячейку и назовем ее \textit{центральной}, а остальные будем называть \textit{образами}.
-
-Энергия дальнодействующего взаимодействия есть сумма энергий взаимодействия между зарядами центральной ячейки и всех остальных зарядов решетки.
-Ее можно записать в виде:
-\begin{equation}
-    \label{eq:ewald:energy_lr}
-    E_{lr}=\iint d \vec{r} d \vec{r'} \rho_{tot}(\vec{r}) \rho_{u c}\left(\vec{r'}\right) \phi_{lr}\left(\vec{r}-\vec{r'}\right),
-\end{equation}
-где введена плотность заряда примитивной ячейки $\rho_{uc} (\vec{r})$, представляющая из себя сумму по зарядам внутри \textit{одной} ячейки:
-\begin{equation}
-    \label{eq:ewald:rho_uc_def}
-    \rho_{uc}(\vec{r}) \eqdef \sum_{\text{charges}\ k} q_{k} \delta\left(\vec{r}-\vec{r}_{k}\right)
-\end{equation}
-и суммарная плотность заряда $\rho_{tot}(\vec{r})$, представляющая из себя ту же сумму, но с добавлением зарядов от образов:
-\begin{equation}
-    \label{eq:ewald:rho_tot_def}
-    \rho_{tot}(\vec{r}) \eqdef \sum_{n_{1}, n_{2}, n_{3}} \sum_{\text{charges}\,k} q_{k} \delta\left(\vec{r}-\vec{r}_{k}-n_{1} \vec{a}_{1}-n_{2} \vec{a}_{2}-n_{3} \vec{a}_{3}\right).
-\end{equation}
-Здесь $\delta (\vec{x})$ ---~ дельта-функция Дирака, $\vec{a_1}$, $\vec{a_2}$, $\vec{a_3}$ ---~ вектора решетки и $n_1$, $n_2$, $n_3$ пробегают по всем целым числам.
-
-На \eqref{eq:ewald:rho_tot_def} можно смотреть как на свертку \eqref{eq:ewald:rho_uc_def} с \textit{функцией ячейки} $L (\vec{r})$:
-\begin{equation}
-    \label{eq:ewald:lattice_function_def}
-    L(\vec{r}) \eqdef \sum_{n_{1}, n_{2}, n_{3}} \delta\left(\vec{r}-n_{1} \vec{a}_{1}-n_{2} \vec{a}_{2}-n_{3} \vec{a}_{3}\right).
-\end{equation}
-Для полученной свертки имеем:
-\begin{equation}
-    \label{eq:ewald:rho_tot_conv_prod}
-    \tilde{\rho}_{tot}(\vec{k}) = \tilde{L}(\vec{k}) \tilde{\rho}_{u c}(\vec{k}),
-\end{equation}
-где тильдами обозначены Фурье-образы.
-
-Для функции ячейки $L(\vec{r})$ Фурье-образ есть:
-\begin{equation}
-    \label{eq:ewald:lattice_function_image}
-    \tilde{L}(\vec{k})=\frac{(2 \pi)^{3}}{\Omega} \sum_{m_{1}, m_{2}, m_{3}} \delta\left(\vec{k}-m_{1} \vec{b}_{1}-m_{2} \vec{b}_{2}-m_{3} \vec{b}_{3}\right),
-\end{equation}
-где $\vec{b_1} = \cfrac{\vec{a}_{2} \times \vec{a}_{3}}{\Omega}$, $\vec{b_2}$ и $\vec{b_3}$ получаются циклическими перестановками, индексы $m_1$, $m_2$, $m_3$ по-прежнему пробегают все целые числа и $\Omega$ есть объем центральной ячейки: $\Omega~=~\vec{a_1} \cdot (\vec{a_2} \times \vec{a_3})$.
-Стоит заметить, что и $L (\vec{r})$, и $\tilde{L} (\vec{r})$ являются действительными четными функциями.
-
-Вводя эффективный одночастичный потенциал
-\begin{equation}
-    \label{eq:ewald:v_def}
-    v(\vec{r}) \eqdef \int d \vec{r'} \rho_{u c}\left(\vec{r'}\right) \phi_{lr}\left(\vec{r}-\vec{r'}\right),
-\end{equation}
-можно переписать \eqref{eq:ewald:energy_lr} в виде:
-\begin{equation}
-    \label{eq:ewald:energy_v_rewrite}
-    E_{lr}=\int d \vec{r} \rho_{tot}(\vec{r}) v(\vec{r})
-\end{equation}
-Заметим, что \eqref{eq:ewald:v_def} тоже является сверткой, что позволяет записать:
-\begin{equation}
-    \label{eq:ewald:v_fourier_conv_prod}
-    \tilde{V}(\vec{k}) \eqdef \tilde{\rho}_{uc}(\vec{k}) \tilde{\Phi}(\vec{k}),
-\end{equation}
-где, как и в \eqref{eq:ewald:rho_tot_conv_prod}, тильдами обозначены Фурье-образы и введен Фурье-образ \eqref{eq:ewald:v_def}:
-\begin{equation}
-    \label{eq:ewald:v_fourier}
-    \tilde{V}(\vec{k})=\int d \vec{r} v(\vec{r}) e^{-i \vec{k} \cdot \vec{r}}.
-\end{equation}
-
-Согласно теореме Планшереля, суммирование для получения $E_{lr}$ можно провести в Фурье-пространстве, что дает:
-\begin{multline*}
-    E_{l r} = \int \frac{d \vec{k}}{(2 \pi)^{3}} \tilde{\rho}_{tot}^{*}(\vec{k}) \tilde{V}(\vec{k})
-    = \int \frac{d \vec{k}}{(2 \pi)^{3}} \tilde{L}^{*}(\vec{k})\left|\tilde{\rho}_{u c}(\vec{k})\right|^{2} \tilde{\Phi}(\vec{k}) = \\
-    = \frac{1}{\Omega} \sum_{m_{1}, m_{2}, m_{3}}\left|\tilde{\rho}_{u c}(\vec{k})\right|^{2} \tilde{\Phi}(\vec{k}),
-\end{multline*}
-\begin{equation}
-    \label{eq:ewald:energy_final}
-    E_{lr} = \frac{1}{\Omega} \sum_{m_{1}, m_{2}, m_{3}}\left|\tilde{\rho}_{u c}(\vec{k})\right|^{2} \tilde{\Phi}(\vec{k}),
-\end{equation}
-где в суммировании $\vec{k}=m_{1} \vec{b}_{1}+m_{2} \vec{b}_{2}+m_{3} \vec{b}_{3}$.
-
-Формула \eqref{eq:ewald:energy_final} есть основной результат.
-Фурье-образ $\tilde{\rho}_{uc} (\vec{k})$ можно подсчитать, к примеру, алгоритмами \acrshort{bpf} (\textit{англ.} \acrshort{fft}).
-Если найден фурье-образ $\tilde{\rho}_{uc} (\vec{k})$, то суммирование (или интегрирование) по $\vec{k}$ становится простым и приобретает быструю сходимость.
-Стоит отметить, что используемая примитивная ячейка должна быть электронейтральной во избежание бесконечных сумм.
-
-На практике суммирование \eqref{eq:ewald:energy_final} ведется в конечном диапазоне значений $m_1$, $m_2$, $m_3$.
-Благодаря особенностям метода отбрасывание остальных членов приводит к небольшой потере точности, однако значительно уменьшает вычислительное время.
-Оценку возникающих из-за отбрасывания ошибок можно найти, например, в \cite{ewald:errors_study}.
-
-\section{Гамильтониан модели \texorpdfstring{\acrshort{veg}}{ВЭГ}}
-Взаимодействующий электронный газ (\acrshort{veg}) ---~ это физическая модель электронного газа, в которой учитывается электростатическое взаимодействие между всеми зарядами в системе.
-В данной работе рассматривается важный частный случай этой модели~--- так называемая модель <<желе>>, в которой электронейтральность обеспечивается компенсирующим фоном положительного заряда с постоянной полностью (так, чтобы суммарный заряд системы был равен нулю). Фон предполагается однородным и несжимаемым.
-
-\textit{При изложении данной главы будем использовать систему единиц СГС.}
-
-Для модели <<желе>> из $N$ электронов, заключенных в объеме $V$, имеющих концентрацию $\rho (\vec{r}) = \sum_{i=1}^{N} \delta(\vec{r}-\vec{r_i})$ при концентрации фоновых зарядов $n(\vec{R}) = N/V$, гамильтониан имеет вид \cite{jel:mahan_hamiltonian}:
-
-\begin{equation}
-    \label{eq:jel:ham_four_sum}
-    \hat{H}=\hat{H}_{e l}+\hat{H}_{b a c k}+\hat{H}_{e l-b a c k}.
-\end{equation}
-Здесь $\hat{H}_{e l}$ ---~ это электронный гамильтониан, состоящий из кинетической энергии и электрон-электронного отталкивания:
-\begin{equation}
-    \label{eq:jel:ham_el_def}
-    \hat{H}_{e l}=\sum_{i=1}^{N} \frac{\hat{\vec{p}}_i^2}{2 m}+\sum_{i<j}^{N} \frac{e^{2}}{\left|\hat{\vec{r}}_{i}-\hat{\vec{r}}_{j}\right|}.
-\end{equation}
-%
-$\hat{H}_{b a c k}$ есть гамильтониан положительного фонового заряда, описывающий его взаимодействие с самим собой. Усредненное значение $\hat{H}_{b a c k}$ есть:
-\begin{equation}
-    \label{eq:jel:ham_back_expect}
-    \left\langle\hat{H}_{b a c k}\right\rangle
-    = \frac{e^{2}}{2} \int_{V} d \vec{R} \int_{V} d \vec{R}' \frac{n(\vec{R}) n\left(\vec{R}'\right)}{\left|\vec{R}-\vec{R}'\right|}
-    = \frac{N^{2}}{2 V} \lim _{\mathbf{q} \rightarrow 0} v_{q},
-\end{equation}
-где введена фурье-компонента кулоновского потенциала $v_{q}=\frac{4 \pi e^{2}}{q^{2}}$.
-%
-Вклад электростатического взаимодействия электрона с фоном описывается членом $H_{el-back}$:
-\begin{multline}
-    \label{eq:jel:ham_el-back_expect}
-    \left\langle\hat{H}_{e l-b a c k}\right\rangle
-    = -\int_{V} d \vec{r} \int_{V} d \vec{R}\, \frac{e^{2} \rho(\vec{r}) n(\vec{R})}{|\vec{r}-\vec{R}|} = {} \\
-    = -\frac{N^{2}}{V} \lim _{\mathbf{q} \rightarrow 0} v_{q}
-    = -2 \left\langle\hat{H}_{b a c k}\right\rangle.
-\end{multline}
-
-Для конечных систем результаты \eqref{eq:jel:ham_back_expect} и \eqref{eq:jel:ham_el-back_expect} получаются конечными, поскольку $q$ достигает отличное от нуля минимальное значение, зависящее от объема системы.
-
-Для систем с периодическими граничными условиями суммирование кулоновского взаимодействия можно провести упомянутым выше методом Эвальда (см. раздел \ref{sec:ewald}).
-Учтем также возможное размытие заряда относительно его равновесного положения в форме функции Гаусса \cite{jel:blinov}.
-
-Введем потенциал в точке $\vec{r}$, создаваемый всей решеткой без одного лишь заряда $j$, но с учетом его образов:
-
-\begin{equation}
-    \label{eq:jel:phi_no_j}
-    \phi_{-j}(\vec{r})=\frac{1}{\varepsilon} \sum_{\vec{n}} \sum_{i=1}^{N} {}^\prime \frac{q_{i}}{\left|\vec{r}-\vec{r}_{i}+\vec{n} L\right|},
-\end{equation}
-где штрих у суммы обозначает, что $i \neq j$ при $\vec{n} = 0$.
-Здесь $q_i$ указан для того, чтобы получающиеся результаты не были привязаны к типам и значениям зарядов.
-Используя выражения для полной энергии:
-\begin{equation}
-    \label{eq:jel:coloumb_energy}
-    E = \frac{1}{2} \sum_{j=1}^{N} q_{j} \phi_{-j}\left(\vec{r}_j\right)
-\end{equation}
-и плотности заряда:
-\begin{equation}
-    \rho_{i}(\vec{r})=q_{i} \cdot \delta\left(\vec{r}-\vec{r}_{\mathrm{i}}\right),
-\end{equation}
-получим полную энергию в виде:
-\begin{equation}
-    \label{eq:jel:ewald_E_coloumb_total}
-    E = \frac{1}{\epsilon} \sum_{\vec{n}} \sum_{i=1}^{N} \sum_{j=1}^{N} {}^\prime \iint \frac{\rho_{i}(\vec{r}) \cdot
-    \rho_{j}\left(\vec{r}'\right)}{\left|\vec{r}-\vec{r}^{\prime}+\vec{n} L\right|} d^3 \vec{r}\, d^3 \vec{r}^{\prime}.
-\end{equation}
-
-Разбиваем заряды на части:
-\begin{equation}
-\label{eq:jel:rho_separation}
-\begin{aligned}
-    \rho_i (\vec{r}) & = \rho_i^S (\vec{r}) + \rho_i^L (\vec{r}), \\
-    \rho_i^S (\vec{r}) & = q_i \delta(\vec{r} - \vec{r_i}) - q_i G_\sigma (\vec{r} - \vec{r_i}), \\
-    \rho_i^L (\vec{r}) & = q_i G_\sigma (\vec{r} - \vec{r_i}),
-\end{aligned}
-\end{equation}
-где введено гауссово размытие заряда
-\begin{equation}
-    \label{eq:jel:gauss_blur}
-    G_\sigma (\vec{r}) = \frac{1}{(2\pi \sigma^2)^{3/2}} \exp \left[ - \cfrac{|\vec{r}|^2}{2\sigma^2} \right].
-\end{equation}
-Дисперсия здесь будет играть роль некоторого параметра.
-
-Выражение для энергии \eqref{eq:jel:coloumb_energy} с учетом \eqref{eq:jel:rho_separation} перепишется в виде:
-\begin{equation}
-    \label{eq:jel:E_separation}
-    E = \frac{1}{2} \sum_{i=1}^N q_i \phi_{-i}^S (\vec{r_i}) + \frac{1}{2} \sum_{i=1}^N q_i \phi^L (\vec{r_i}) - \frac{1}{2} \sum_{i=1}^N q_i \phi_i^L (\vec{r_i})
-    = E^S + E^L - E^{self}.
-\end{equation}
-
-Уравнение Пуассона для случая, когда заряд распределен по функции Гаусса, может быть решено аналитически. Само уравнение имеет вид:
-\begin{equation}
-    \label{eq:jel:phi_poisson}
-    \Delta \phi_i (\vec{r}) = - \frac{4\pi}{\epsilon}\, G_\sigma (\vec{r}),
-\end{equation}
-а его решение выражается через функцию ошибок $\mathrm{erf} (x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} dt$ следующим образом:
-\begin{equation}
-    \label{eq:jel:phi_solution}
-    \phi_\sigma (r) = \frac{1}{\epsilon r}\, \mathrm{erf} \left( \frac{r}{\sqrt{2}\sigma} \right).
-\end{equation}
-
-Таким образом,
-\begin{equation}
-\label{eq:jel:phi_S_solution}
-\begin{aligned}
-    \phi_i^S (\vec{r}) &= \frac{1}{\epsilon} \frac{q_i}{|\vec{r} -\vec{r_i}|}\, \mathrm{erfc} \left[ \frac{|\vec{r} - \vec{r_i}|}{\sqrt{2} \sigma} \right], \\
-    \phi_i^L (\vec{r}) &= \frac{1}{\epsilon} \frac{q_i}{|\vec{r} -\vec{r_i}|}\, \mathrm{erf} \left[ \frac{|\vec{r} - \vec{r_i}|}{\sqrt{2} \sigma} \right],
-\end{aligned}
-\end{equation}
-где $\mathrm{erfc} (x) = 1 - \mathrm{erf} (x)$. Теперь, с учетом размытия, можно переписать $\phi^S_{-i} (\vec{r})$ в виде:
-\begin{equation*}
-    \phi_{-i}^S (\vec{r}) = \frac{1}{\epsilon} \sum_\vec{n} \sum_{j=1}^N {}^\prime \frac{q_j}{| \vec{r} - \vec{r_j} + \vec{n}L |}\, \mathrm{erfc} \left( \frac{|\vec{r} - \vec{r_j} + \vec{n}L}{\sqrt{2} \sigma} \right),
-\end{equation*}
-а энергию:
-\begin{equation*}
-    E^S = \frac{1}{2} \sum_{i=1}^N q_i \phi_{-i}^S (\vec{r_i})
-    = \frac{1}{2\epsilon} \sum_\vec{n} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\vec{r_i} - \vec{r_j} + \vec{n}L|}\, \mathrm{erfc} \left( \frac{|\vec{r_i} - \vec{r_j} + \vec{n}L|}{\sqrt{2}\sigma} \right).
-\end{equation*}
-Это выражение аналогично исходному лишь с той разницей, что сумма обрезается функцией $\mathrm{erfc}$, что упрощает расчет.
-
-Используя $\mathrm{erfc} (x) \xrightarrow[x \rightarrow 0]{} \frac{2}{\sqrt{\pi}} x$, можно получить для $E^{self}$:
-\begin{equation}
-    \label{eq:jel:E_self_final}
-    E^{self} = \frac{1}{\epsilon} \frac{1}{\sqrt{2} \sigma} \sum_{i=1}^N q_i^2.
-\end{equation}
-
-Таким образом, осталось посчитать третью, дальнодействующую, часть.
-Как было отмечено в разделе \ref{sec:ewald}, дальнодействующая часть считается в обратном пространстве.
-
-Записывая плотность заряда в виде суммы по всем зарядам системы, периодически повторяющимся в пространстве:
-\begin{equation*}
-    \rho^L (\vec{r}) = \sum_\vec{n} \sum_{j=1}^N q_j G_\sigma (\vec{r} - \vec{r_j} + \vec{n}L),
-\end{equation*}
-имеем для Фурье-образа:
-\begin{equation*}
-    \tilde{\rho}\,^L (\vec{k}) = \int_V \sum_{j=1}^N q_j G_\sigma(\vec{r} - \vec{r_j} + \vec{n}L) e^{-i\vec{k}\vec{r}} d \vec{r}
-    = \sum_{j=1}^N q_j e^{-i \vec{k} \vec{r_j}} e^{-\sigma^2 k^2 / 2} d\vec{r}.
-\end{equation*}
-Здесь использован тот факт, что $k$ есть вектор обратной решетки и потому $\exp(-i \vec{k} \vec{n} L) = 1$.
-
-Тогда для Фурье-образа потенциала имеем:
-\begin{equation}
-    \label{eq:jel:phi_L_fourier}
-    \tilde{\phi}\,^L (\vec{k}) = \frac{4\pi}{\epsilon} \sum_{j=1}^N q_j e^{-i \vec{k} \vec{r_j}}\, \frac{ e^{-\sigma^2 k^2 / 2} }{ k^2 },
-\end{equation}
-а сам потенциал (через обратное преобразование):
-\begin{equation}
-    \label{eq:jel:phi_L_spatial}
-    \phi^L (\vec{r}) = \frac{4\pi}{V \epsilon} \sum_{\vec{k} \neq 0} \sum_{j=1}^N \frac{q_j}{k^2}\, e^{i \vec{k} (\vec{r} - \vec{r_j})} e^{-\sigma^2 k^2 / 2}.
-\end{equation}
-Вклад члена с $\vec{k} = 0$ нулевой, так как полный заряд примитивной ячейки предполагается нулевым.
-Для энергии $E^L$ получаем:
-\begin{equation}
-    \label{eq:jel:E_L_final}
-    E^L = \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \sum_{i=1}^N \sum_{j=1}^N \frac{q_i q_j}{k^2} e^{i \vec{k} (\vec{r_i} - \vec{r_j})} e^{-\sigma^2 k^2 / 2}.
-\end{equation}
-
-Определяя структурный фактор $S (\vec{k}) = \sum_{i=1}^N q_i e^{i\vec{k} \vec{r_i}}$, дальнодействующую часть энергии возможно переписать в виде:
-\begin{equation}
-    \label{eq:jel:E_L_from_S}
-    E^L = \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 /2}}{k^2} | S (\vec{k}) |^2
-\end{equation}
-и получить окончательное выражение для полной энергии:
-\begin{equation}
-\label{eq:jel:total_energy_final}
-\begin{aligned}
-    E &= E^S + E^L - E^{self} = \\
-    &= \frac{1}{2 \epsilon} \sum_{\vec{n}} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\vec{r_i} - \vec{r_j} + \vec{n}L|}\, \mathrm{erfc} \left( \frac{ |\vec{r_i} - \vec{r_j} + \vec{n}L| }{ \sqrt{2} \sigma } \right) + \\
-    &+ \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 / 2}}{k^2} | S (\vec{k}) |^2 - \frac{1}{\epsilon} \frac{1}{\sqrt{2\pi} \sigma} \sum_{i=1}^N q_i^2.
-\end{aligned}
-\end{equation}
-
-Собирая результаты воедино, получим гамильтониан модели \acrshort{veg}:
-% TODO: (a.kozharin) Подумать, как собрать эту солянку из трех статей в один гамильтониан <- Mon Jun 22 00:30:13 2020
-\begin{multline}
-    \label{eq:jel:ham_final}
-        \hat{H} = \sum\limits_{i=1}^{N} \cfrac{\hat{\vec{p}}_{i}^2}{2m}\, +
-        \frac{1}{2 \epsilon} \sum_{\vec{n}} \sum_{i=1}^N \sum_{j=1}^N {}^\prime \frac{q_i q_j}{|\hat{\vec{r}}_i - \hat{\vec{r}}_j + \hat{\vec{n}}L|}\, \mathrm{erfc} \left( \frac{ |\hat{\vec{r}}_i - \hat{\vec{r}}_j + \hat{\vec{n}}L| }{ \sqrt{2} \sigma } \right) + {} \\
-        {} + \frac{4\pi}{2V \epsilon} \sum_{\vec{k} \neq 0} \frac{e^{-\sigma^2 k^2 / 2}}{k^2} | \hat{S} (\vec{k}) |^2 - \frac{1}{\epsilon} \frac{1}{\sqrt{2\pi} \sigma} \sum_{i=1}^N q_i^2.
-\end{multline}
-Здесь $\hat{S} (\vec{k}) = \sum\limits_{i=1}^{N} q_{i} e^{i \vec{k} \hat{\vec{r}}_{i}}$, а оператор $\hat{\vec{n}}L$ соответствует координатному сдвигу на целое число ячеек.
-
-\section{Усреднение по направлениям и изотропная модель \texorpdfstring{\acrshort{veg}}{ВЭГ}}
-Непосредственное суммирование по Эвальду в том виде, который приведен в секции \ref{sec:ewald}, имеет два практических недостатка:
+Процесс обучения состоит из трех стадий:
 \begin{enumerate}
-    \item Вычислительная сложность (нагрузка на процессор компьютера) быстро растет с ростом числа частиц в главной ячейке (как $N^2$).
-    \item Комбинирование дальнодействующего кулоновского взаимодействия с периодическими граничными условиями может привести к появлению неизотропического электрического поля, имеющего кубическую симметрию в кристаллической решетке, составленной из главных ячеек.
-        Поэтому любая процедура суммирования кулоновских сил в неупорядоченной системе может считаться подходящей лишь в том случае, если погрешность результата, вызванная этой искуственной симметрией, пренебрежимо мала.
+    \item Сбор данных (data collection), см. \ref{sec:data-mining}.
+    \item Обработка (processing) собранных документов, см. \ref{sec:preprocessing}.
+    \item Обучение модели и сохранение артефактов, см. \ref{sec:training}.
 \end{enumerate}
-В \cite{jel:pre-averaged_summation} предлагается новый метод суммирования, основанный на предварительном усреднении вдоль всех направлений главной ячейки.
-Предполагается, что ячейка имеет вид куба с объемом $V = L^3$ и на систему наложены периодические граничные условия вместе с условиями электронейтральности.
+Каждая из этих стадий будет раскрыта подробнее в дальнейших секциях.
 
-Для начала заметим, что подбором параметра размытия $\sigma$ можно добиться возможности отбросить значительную часть членов суммирования в \eqref{eq:jel:total_energy_final} \cite{rapaport:terms_cutoff}. 
-В дальнейшем будем предполагать, что используемый параметр размытия позволяет  осуществить такое упрощение.
+\section{Структура данных}
+\subsection{Сырые данных}
+В настоящей работе в качестве входных данных выступают документы, выгруженные из открытых источников в сети Интернет.
+Данные представляют из себя веб-страницы, сохраненные локально в разнообразных форматах (HTML, PDF, .doc и другие).
+Сопутствующий мультимедийный контент (видеозаписи, аудизаписи, картинки и т.п.) не сохраняется и не учитвается в модели.
+Любой язык разметки, метаинформация, скрипты и таблицы стилей (в случае HTML) сохраняются в сырых документах <<как есть>>.
 
-Приведем \eqref{eq:jel:total_energy_final} к виду, полученному в оригинальной работе Эвальда \cite{ewald:summation_original}.
-Для этого необходимо сделать замену $\delta = \frac{\sqrt{2} \pi}{\sigma}$, а $| S (\vec{k}) |^2$ явно раскрыть с выделением тригонометрических функций. Члены порядка $\exp(-\delta^2 L^2)$ будут давать малый вклад в энергию, если выбрать типичное значение $\delta = 5 / L$ \cite{rapaport:terms_cutoff}.
-Рассматривая энергию кулоновского взаимодействия $N$ ионов в главной ячейке, получим:
-\begin{equation}
-    \label{eq:mean:E_coloumb_main-cell}
-    E_N = \sum\limits_{i=1}^{N} q_i \phi (\vec{r}_{i}),
-\end{equation}
-где $\phi (\vec{r}_{i})$ ---~ электростатический потенциал $i$-го иона в точке $\vec{r}_{i}$.
-% TODO: (a.kozharin) Вот тут мы просто прыгаем к виду Эвальда. Нет, выкладки стоит самому провести и проверить, если останется время. Но, мне кажется, если считать только энергию главной ячейки и уйти на обозначения Эвальда, то должно быть все ок <- Mon Jun 22 23:53:31 2020
-Согласно \cite{ewald:summation_original}, $\phi$ имеет вид:
-\begin{equation}
-    \label{eq:mean:phi_as_sum}
-    \phi (\vec{r}_{i}) = \phi_1 (\vec{r}_{i}) + \frac{1}{2}\, \sum\limits_{j \neq i}^{N} \phi_2 (\vec{r}_{i}, \vec{r}_{j}),
-\end{equation}
-где в отстутствии внешнего поля $\phi_1$ есть константа:
-\begin{equation}
-    \label{eq:mean:phi_1}
-    \phi_1 = \cfrac{q_{i}}{L}\, \left( \frac{1}{2\pi}\, \sum\limits_{n > 0}^{} \frac{1}{n^2}\, e^{-\pi^2 n^2 / \delta^2} - \cfrac{\delta}{\sqrt{\pi}}\, \right),
-\end{equation}
-а парный потенциал получается следующим:
-\begin{equation}
-    \label{eq:mean:phi_2}
-    \phi_2 = q_{j} \left[ \frac{1}{r_{ij}}\, \mathrm{erfc} \left( \delta \cfrac{r_{ij}}{L}\, \right) + \frac{1}{2\pi L}\, \sum\limits_{\vec{n} > 0}^{} \frac{1}{n^2}\, e^{-\pi^2 n^2 / \delta^2} \cos \left( \frac{2\pi}{L}\, \vec{n} \cdot \vec{r}_{ij} \right) \right].
-\end{equation}
-Здесь $\vec{n} / L$ есть трехмерный взаимный вектор решетки ($n = | \vec{n} |$), $\vec{r}_{ij} = \vec{r}_{i} - \vec{r}_{j}$, $r_{ij} = |\vec{r}_{ij}|$.
-Параметр $\delta / L$ обычно называют параметром Эвальда.
+Все документы, участвующие в процессе, делятся на категории.
+Категории заранее фиксированы и размечаются вручную.
+Ниже приведен их список:
+\label{categories}
+\begin{itemize}
+    \item Sales, Marketing and PR
+    \item HR
+    \item Finance and Banking
+    \item IT, IT research and Development
+    \item Manufacturing
+    \item Medical and Paramedical
+    \item Business and Corporate
+    \item Legal
+    \item Others
+\end{itemize}
 
-Учитывая, что все направления главной решетки в изотропической жидкости должны быть равноправны, обе части \eqref{eq:mean:phi_2} можно усреднить вдоль всех всех направлений вектора $\vec{n}$.
-Обозначая $\phi_2 (r_{ij}) \equiv \langle \phi_2 (\vec{r}_{ij}) \rangle$, получим:
-\begin{equation}
-    \label{eq:mean:phi_2_averaged}
-    \phi_2 (r_{ij}) = \frac{q_{j}}{r_{ij}} \left[ \mathrm{erfc} \left( \delta \cfrac{r_{ij}}{L}\, \right) + \frac{1}{2\pi^2}\, \sum\limits_{\vec{n} > 0}^{} \frac{1}{n^3}\, e^{-\pi^2 n^2 / \delta^2} \sin \left( \frac{2\pi}{L}\, n r_{ij} \right) \right].
-\end{equation}
-Поскольку $\mathrm{erfc}(x) - 1$ и $\sin (x)$ являются нечетными функциями, возможно следующее разложение в ряд:
-\begin{equation}
-    \label{eq:mean:phi_2_series}
-    \phi_2 (r_{ij}) = \cfrac{q_{j}}{r_{ij}}\, \left( 1 + \sum\limits_{k \geq 0}^{} C_{k} r_{ij}^{2k+1} \right),
-\end{equation}
-где коэффициенты $C_k$ можно найти прямым разложением в ряд Маклорена \eqref{eq:mean:phi_2_averaged} с использованием формулы Эйлера-Маклорена, обобщенной на случай суммирования по трехмерному пространству.
-Это в результате даст следующие выражения для членов ряда \cite{jel:pre-averaged_summation}:
-\begin{equation}
-    \label{eq:mean:C_coeffs}
-    \begin{aligned}
-        C_0 &= \frac{1}{\pi}\, \sum\limits_{\vec{n} > 0}^{} \frac{1}{n^2}\, e^{-\pi^2 n^2 / \delta^2} - \frac{2\delta}{\sqrt{\pi}}, \\
-        C_1 &= \frac{2\pi}{3 L^3}, \\
-        C_k &= 0, \quad k > 1.
-    \end{aligned}
-\end{equation}
-Если теперь учесть условие электронейтральности, то окажется, что член в \eqref{eq:mean:phi_2_series}, не зависящий от расстояния (пропорциональный $C_0$), уничтожает вклад от $\phi_1$ в \eqref{eq:mean:phi_as_sum}.
-Это означает, что суммарная энергия кулоновского взаимодействия в главной ячейке может быть описана суммой $E_N = \sum_{i=1}^N \phi (r_{ij})$, где
-\begin{equation}
-    \label{eq:mean:phi_final}
-    \phi (r_{ij}) = \frac{q_i q_j}{r_{ij}}\, \left[ 1 + \frac{1}{2}\, \left( \frac{r_{ij}}{r_{m}} \right)^3 \right]
-\end{equation}
-и $r_{m} = (3 / 4 \pi)^{1 / 3} L$ ---~ радиус эквивалентной по объему сферы главной ячейки: $\frac{4}{3} \pi r_{m}^3 = L^3$.
+Разметка сырых данных фиксируется на уровне веб-сайта, т.е. \textbf{все} документы одного веб-сайта относятся к одинаковой категории.
+Такой способ разметки является приближенным, поскольку один и тот же веб-сайт может содержать документы, относящиеся к различным тематикам (к примеру, медицинский сайт может содержать помимо мед.документов образцы договоров об оказании платных услуг).
+\subsection{Данные для обучения}
+Модель классификатора реализована на очищенных и нормализованных документах.
+Данные для обучения представляют из себя набор файлов (по одному на каждую категорию из \ref{categories}), каждый из которых содержит множество документов.
 
-Результат \eqref{eq:mean:phi_final} и есть усредненный по направлениям потенциал.
-Он обладает следующими свойствами:
-\begin{enumerate}
-    \item Он стремится к чистому кулоновскому парному потенциалу при малых межионных расстояниях;
-    \item Его первая производная равна нулю в $r_{m}$;
-    \item Его значение в минимуме $r = r_m$ отлично от нуля и равно $\phi (r_m ) = 3 q_i q_j / 2 r_m$.
-\end{enumerate}
+Каждый документ в таком файле представляет из себя одну строку, которая заполнена словами в свой начальной форме, разделенными пробелом.
+В таком формате данные предстают в человекочитаемом виде и то же время могут быть легко обрабтаны компьютером.
 
-Значение потенциала в точке $r_m$ можно обнулить, прибавив к нему постоянную добавку $-\phi (r_m)$.
-Воспользовавшись условием электронейтральности, получаем окончательное выражение суммарной кулоновской энергии главной ячейки в следующем виде:
-\begin{equation}
-    \label{eq:mean:E_coloumb_main-cell_final}
-    E_N = - \sum\limits_{i=1}^{N} \frac{3q_{i}^2}{4\pi r_m}\, + \frac{1}{2}\, \sum\limits_{i=1}^{N} \sum\limits_{j=1, j \neq i}^{N} \tilde{\phi} (r_{ij}),
-\end{equation}
-где
-\begin{equation}
-    \label{eq:mean:phi_tilde}
-    \tilde{\phi} (r) =
-    \begin{cases}
-        \cfrac{q_i q_j}{r}\, \left\{ 1 + \cfrac{1}{2}\, \left( \cfrac{r}{r_m}\,  \right) \left[ \left(\cfrac{r}{r_m}\,   \right)^2 - 3 \right] \right\}, \quad r < r_m \\
-        0, \quad r \geq r_m
-    \end{cases}
-\end{equation}
-есть эффективный короткодействующий потенциал межчастичного взаимодействия, который равен нулю вместе со своими производными в точке $r_m$ и остается таковым при $r > r_m$.
+\section{Получение сырых данных}
+\label{sec:data-mining}
+\subsection{Общее описание \gls{crawler}}
+\begin{wrapfigure}{r}{7cm}
+    \centering
+    \includegraphics[width=\linewidth]{crawlers-pipeline}
+    \caption{Архитектура \gls{crawler}}
+    \label{fig:crawler-pipeline}
+\end{wrapfigure}
+Для получения документов была разработана программа для выгрузки веб-страниц (\gls{crawler}).
+Для достижения большей производительности \gls{crawler} был написан на языке \gls{golang}, сочетающим высокую скорость работы и относительную простоту написания кода.
 
-Объединяя полученное выражение с кинетической энергией, получим \textit{гамильтониан изотропной модели \acrshort{veg}} в координатном представлении:
-% Там жесткая привязка на сравнение с r_m и я не придумал, как ее в общий вид впихнуть. Поэтому пока только в координатном представлении.
-\begin{equation}
-    \label{eq:mean:ham_final}
-    \hat{H} = \sum\limits_{i=1}^{N} \frac{\hat{\vec{p}}_{i}^2}{2m}\, - \sum\limits_{i=1}^{N} \frac{3q_{i}^2}{4\pi \hat{r}_m}\, + \frac{1}{2}\, \sum\limits_{i=1}^{N} \sum\limits_{j=1, j \neq i}^{N} \tilde{\phi} (\hat{r}_{ij}).
-\end{equation}
+Схематично архитектура краулера показана на рис. \ref{fig:crawler-pipeline}.
+На каждую поддерживаемую локализацию заводится своя база данных, содержащая ссылки сайтов, сгруппированные по категории.
+Категории сайта записываются в базу данных вместе с множеством URL-адресов - пример этого изображен на рис. \ref{fig:crawler-db-head}.
+Такая БД содержит немного данных, поэтому для простоты интеграции с \gls{golang} в качестве \acrshort{dbms} используется \gls{sqlite}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{crawler-db-head}
+    \caption{Пример данных из БД краулера}
+    \label{fig:crawler-db-head}
+\end{figure}
+Файл с заполненной базой данных поступает на вход программе \gls{crawler} (второй большой прямоугольник на \ref{fig:crawler-pipeline}), который запускет обход в глубину каждого URL-адреса.
+В каждом выгруженном веб-сайте ищутся все возможные гиперссылки на другие страницы, и эти гиперссылки добавляются в очередь выгрузки.
+Процесс продоложается до тех пор, пока вся очередь выгрузки для данного сайта не будет исчерпана, либо не будет достигнут лимит на количество загружаемых документов с одной страницы (\crawlerPageLimit).
+\subsection{Типы используемых \gls{crawler}}
+Существует несколько типов краулеров и подходов к их реализации \cite{cite:crawler-review}.
+Помимо этого на стороне сайта возможно применение методов защиты от автоматической выгрузки \cite{cite:crawler-protection}.
+Это, с одной стороны, создает некоторую вариативность, а с другой стороны -- обязывает иметь запасные варианты реализации сбора данных с веб-страниц.
+С учетом данных факторов в настоящей работе используется три типа \gls{crawler}: \textit{google crawler}, \textit{colly crawler} \cite{cite:colly} и \textit{common index crawler} \cite{cite:common-crawl}.
+
+Google \gls{crawler} напрямую запрашивает все документы с сайта через веб-поисковик \url{https://google.com}.
+Этот метод весьма эффективен, т.к. полагается на собираемый Google индекс сайтов, но в то же время очень ограничен, т.к. \url{google.com} достаточно быстро начинает запрашивать CAPTCHA при запросе.
+Обойти проверку CAPTCHA возможно несколькими способами, описанными, к примеру, в \cite{cite:captcha-bypass-1} и \cite{cite:captcha-bypass-2}.
+Однако все эти способы требуют большие вычислительные мощности, что не удовлетворяло требованию о быстрой работе краулера.
+Поэтому были разработы другие краулеры.
+
+Common Index \gls{crawler} запрашивает копию страницы из интернет-архива \href{https://commoncrawl.org/}{Common Crawl}.
+Это -- самый безотказный способ, т.к. веб-архив не требует ввода CAPTCHA и имеет нестрогие ограничения на количество запросов.
+Тем не менее, архив может содержать не все страницы и скорость загрузки может быть ограничена из-за технических особенностей платформы.
+
+Colly \gls{crawler} \cite{cite:colly} является самым продвинутым из описанных краулеров.
+В то время как остальные \gls{crawler} полагаются на сторонние ресурсы, colly самостоятельно проходит по всем сайтам, выискивая все возможные гиперссылки на другие документы и проходя по ним в следующей итерации.
+Такой алгоритм приводит к тому, что выгружаются практически все документы с сайта (кроме тех, что защищены авторизацией или проверками на ботов).
+К сожалению, на больших сайтах алгоритм может достаточно долго блуждать по гиперссылкам.
+Более того, нет никакой гарантии, что полученный граф обхода не содержит циклов, поэтому colly crawler может потенциально уйти в вечный цикл.
+Для защиты от указанных проблем в данном \gls{crawler} выставлен лимит на время выполнения (\collyTimeLimit) и суммарный размер выгружаемых документов (\collySizeLimit).
+
+Использование всех трех краулеров показало хорошие результаты -- по каждому языку было выгружено около 30 Gb сырых документов, что составило порядка 200 тысяч документов.
+
+\section{Преобразование сырых данных в данные для модели}
+\label{sec:preprocessing}
+% TODO: (ruapyyj) рассказ про тику и tokenizer <- Fri Apr 15 01:22:24 2022
+% TODO: (ruapyyj) сравнение spacy и расскажи, как перевел все на nltk ради скорости <- Fri Apr 15 01:22:24 2022
+
+\section{Модель \acrshort{ml} и ее обучение}
+\label{sec:training}
+% TODO: (ruapyyj) просто обзор, т.к. в модель ты почти не лез <- Fri Apr 15 01:22:51 2022

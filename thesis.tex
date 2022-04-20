@@ -5,6 +5,8 @@ subf,        % использовать пакет subcaption для вложе�
 href,        % использовать пакет hyperref для создания гиперссылок
 colorlinks,  % цветные гиперссылки
 %fixint,     % включить прямые знаки интегралов
+% TODO: (ruapyyj) уберите перед релизом <- Wed Apr 20 22:07:11 2022
+% draft,
 ]{disser}
 
 \usepackage[
@@ -21,7 +23,7 @@ colorlinks,  % цветные гиперссылки
 % Подпись под картинками
 \renewcommand\thesubfigure{\asbuk{subfigure}}
 
-
+\usepackage{float}
 
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -30,7 +32,7 @@ colorlinks,  % цветные гиперссылки
 \ifpdf\usepackage{epstopdf}\fi
 \usepackage[autostyle]{csquotes}
 % TODO: (a.kozharin) Уберите этот импорт в конце работы. Показывает label справа от каждого уравениния <- Tue Jun  9 15:45:05 2020
-\usepackage[left]{showlabels}
+% \usepackage[left]{showlabels}
 
 % На всякий случай, старая эпсилон
 \newcommand{\epsilonn}{\epsilon}
@@ -98,6 +100,10 @@ colorlinks,  % цветные гиперссылки
 %\def\conclusionname{Выводы}
 %\def\bibname{Литература}
 
+% МОИ константы
+\newcommand{\crawlerPageLimit}{5000}
+\newcommand{\collyTimeLimit}{120 минут}
+\newcommand{\collySizeLimit}{30 Mb}
 %
 % Титульный лист на русском языке
 %
@@ -178,9 +184,9 @@ colorlinks,  % цветные гиперссылки
 % Глава 1
 \input{1}
 % Глава 2
-% \input{2}
+\input{2}
 % Глава 3
-% \input{3}
+\input{3}
 
 % Заключение
 \input{concl}

@@ -6,6 +6,7 @@
 \newacronym{ovr}{OvR}{One-vs.-rest}
 \newacronym{ovo}{OvO}{One-vs.-one}
 \newacronym{ml}{ML}{Машинное обучение}
+\newacronym{dbms}{DBMS}{Database Management System, также СУБД -- система управления базами данных}
 \newacronym{tf_idf}{TF-IDF}{Term frequency - Inverse Document Frequency}
 \newglossaryentry{sup_learning}
 {
@@ -52,4 +53,39 @@
 {
     name=hyperparameters,
     description={Набор численных параметров, которые нельзя оптимизировать на основе обучающей выборки}
+}
+\newglossaryentry{decision-tree}
+{
+    name=decision tree,
+    description={Алгоритм, основанный на построении дерева, каждый узел которого разбивает данные в соответствии с некоторым условием (чаще всего разбивается по пороговой функции)}
+}
+\newglossaryentry{binary-decision-tree}
+{
+    name=binary decision tree,
+    description={Решающее дерево, у которого каждая вершина имеет не более двух потомков}
+}
+\newglossaryentry{pipeline}
+{
+    name=pipeline,
+    description={Последовательность действий в некотором сложном процессе (обработка данных, бизнес-процесс команды и т.п.)}
+}
+\newglossaryentry{random-forest}
+{
+    name=random forest,
+    description={Ансамбль отдельно взятых решающих деревьев (\gls{decision-tree}), построенных с использованием беггинга и случайных подпространств и дающий высокое качество решения в задачах классификации}
+}
+\newglossaryentry{crawler}
+{
+    name=crawler,
+    description={Программа для обхода веб-страниц и выгрузки ее контента для дальнейшей обработки (индексация страниц, поиск документов, выгрузка текстов и т.д.)}
+}
+\newglossaryentry{golang}
+{
+    name=golang,
+    description={Компилируемый многопоточный язык общего назначения со строгой типизацией. \href{https://go.dev/}{Официальная страница}}
+}
+\newglossaryentry{sqlite}
+{
+    name=SQLite,
+    description={Минималистичная \acrshort{dbms}, предназначенная для быстрого создания легковесного хранлища (с возможность хранения в единственном файле)Официальная страница}
 }
