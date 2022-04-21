@@ -1,5 +1,5 @@
 %!TEX root = thesis.tex"`
-
+\chapter{Используемое hardware}
 % \chapter{Пример расчета\\ термодинамических свойств \texorpdfstring{\acrshort{ifg}}{ИФГ}}
 % Модуль легко ставится через \Gls{pypi}:
 % \begin{minted}{bash}
@@ -67,3 +67,42 @@
 
 % Больше примеров можно найти по ссылке \url{https://ifg-py.readthedocs.io/en/latest/class_desc.html}.
 % Код графиков \ref{fig:chemical_potential}, \ref{fig:heat_capacity}, \ref{fig:sound_velocity} доступен в репозитории: \url{https://github.com/alekseik1/ifg-py/tree/master/examples/plots}.
+\appendix
+\chapter{Примеры данных после каждой стадии}
+\begin{listing}[!ht]
+\begin{minted}{json}
+{
+  "metadata": {
+    "Content-Encoding": "UTF-8",
+    "Content-Language": "en-GB",
+    "Content-Type": "text/html; charset=UTF-8",
+    "X-Parsed-By": [
+      "org.apache.tika.parser.DefaultParser",
+      "org.apache.tika.parser.html.HtmlParser"
+    ],
+    "dc:title": "Amex - Giving Airmiles a Human Touch",
+    "og:site_name": "BBH Global",
+    "og:title": "Amex - Giving Airmiles a Human Touch",
+    "og:type": "website",
+    "og:url": "https://www.bartleboglehegarty.com/...",
+    "title": "Amex - Giving Airmiles a Human Touch",
+    "language": "en"
+  },
+  "content": "\n\nAmex - Giving Airmiles a Human Touch\n...",
+  "status": 200
+}
+\end{minted}
+\caption{Пример данных после \gls{tika}}
+\label{listing:tika-example}
+\end{listing}
+
+\begin{listing}[!ht]
+\begin{minted}{text}
+home the richards group about u culture our people practice ...
+omnicom group global marketing communication omnicom group ...
+legal the richards group about u culture our people practice ...
+interpublic group ipg ipg our value diversity and inclusion ... 
+\end{minted}
+\caption{Пример данных после \gls{nltk}}
+\label{listing:tokenizer-example}
+\end{listing}

@@ -104,6 +104,8 @@ colorlinks,  % цветные гиперссылки
 \newcommand{\crawlerPageLimit}{5000}
 \newcommand{\collyTimeLimit}{120 минут}
 \newcommand{\collySizeLimit}{30 Mb}
+\newcommand{\datasetSize}{30 Gb }
+\newcommand{\datasetDocs}{200'000 }
 %
 % Титульный лист на русском языке
 %
@@ -178,6 +180,10 @@ colorlinks,  % цветные гиперссылки
 \input{abstract}
 % Содержание
 \tableofcontents
+\renewcommand\listoflistingscaption{Примеры исходных кодов}
+\renewcommand{\listingscaption}{Листинг}
+\listoflistings % Now typeset the list
+\printnoidxglossaries
 
 % Введение
 \input{intro}
@@ -194,7 +200,6 @@ colorlinks,  % цветные гиперссылки
 
 % Список литературы
 \printbibliography[heading=bibintoc]
-\printnoidxglossaries
 
 % Приложения
 \appendix
