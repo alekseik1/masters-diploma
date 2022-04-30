@@ -1,5 +1,28 @@
 %!TEX root = thesis.tex"`
-\chapter{Используемое hardware}
+\chapter{Описание инфраструктуры}
+\label{sec:gcloud}
+В настоящей работе инфраструктура развертывания проекта была выполнена на базе серверов облачного провайдера \href{https://cloud.google.com}{Google Cloud}.
+
+Система обучения развернута на \gls{vps} машине, для долгосрочного хранения данных и артефактов используется \gls{s3}-хранилище.
+
+Характеристики \gls{vps} машины представлены ниже:
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        Тип               & e2-standard-8      \\ \hline
+        CPU Platform      & Intel Broadwell    \\ \hline
+        Ядер              & 8                  \\ \hline
+        RAM               & 32 \acrshort{gb}   \\ \hline
+        Диск для загрузки & 100 \acrshort{gb}  \\ \hline
+        Диск для хранения & 1536 \acrshort{gb} \\ \hline
+        Файловая система  & XFS                \\ \hline
+        ОС                & Debian 11          \\ \hline
+    \end{tabular}
+    \caption{Характеристики основной машины}
+    \label{tab:vps-info}
+\end{table}
 % \chapter{Пример расчета\\ термодинамических свойств \texorpdfstring{\acrshort{ifg}}{ИФГ}}
 % Модуль легко ставится через \Gls{pypi}:
 % \begin{minted}{bash}
